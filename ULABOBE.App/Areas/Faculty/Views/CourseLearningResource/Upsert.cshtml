@@ -1,0 +1,141 @@
+﻿@model ULABOBE.Models.ViewModels.CourseLearningResourceVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Learning Resource";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.CourseLearningResource.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseLearningResource.Id" />
+            <input type="hidden" asp-for="CourseLearningResource.QueryId" />
+            <input type="hidden" asp-for="CourseLearningResource.CreatedBy" />
+            <input type="hidden" asp-for="CourseLearningResource.CreatedIp" />
+            <input type="hidden" asp-for="CourseLearningResource.CreatedDate" />
+            //edit
+            title = "Edit Learning Resource";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Instructor
+                </div>
+                <div class="col-8">
+                    <b>@ViewBag.InstructorInfo</b>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <b>@ViewBag.Semester</b>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseLearningResource.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseLearningResource.CourseHistory" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group row">
+            <div class="col-4">
+                Semester
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseLearningResource.SemesterId, Model.SemesterLists, "-Select a Semester",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseLearningResource.SemesterId" class="text-danger"></span>
+            </div>
+        </div>*@
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseLearningResource.LearningResourceTypeId, Model.LearningResourceTypeLists, "-Select a Learning Resource Type",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseLearningResource.LearningResourceTypeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseLearningResource.BookInfo"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="CourseLearningResource.BookInfo" class="form-control"></textarea>
+                    <span asp-validation-for="CourseLearningResource.BookInfo" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="CourseLearningResource.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseLearningResource.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseLearningResource.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseLearningResource.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseLearningResource.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.CourseLearningResource.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.CourseLearningResource.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

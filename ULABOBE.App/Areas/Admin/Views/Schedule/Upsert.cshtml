@@ -1,0 +1,138 @@
+﻿@model ULABOBE.Models.ViewModels.ScheduleVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Schedule";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Schedule.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Schedule.Id" />
+            <input type="hidden" asp-for="Schedule.QueryId" />
+            <input type="hidden" asp-for="Schedule.CreatedBy" />
+            <input type="hidden" asp-for="Schedule.CreatedIp" />
+            <input type="hidden" asp-for="Schedule.CreatedDate" />
+            //edit
+            title = "Edit Schedule";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    From Day
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Schedule.ScDay1, Model.WeekDayLists, "-Select a Day",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Schedule.ScDay1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    To Day
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Schedule.ScDay2, Model.WeekDayLists, "-Select a Day",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Schedule.ScDay2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    From Time
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Schedule.FromTime, Model.TimeLists, "-Select a Time",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Schedule.FTime" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    To Time
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Schedule.ToTime, Model.TimeLists, "-Select a Time",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Schedule.ToTime" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Schedule.Priority"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Schedule.Priority" class="form-control" />
+                    <span asp-validation-for="Schedule.Priority" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Schedule.IsActive"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Schedule.IsActive" class="form-control" />
+                    <span asp-validation-for="Schedule.IsActive" class="text-danger"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="Schedule.IsDeleted" value="false" />
+            <input type="hidden" asp-for="Schedule.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="Schedule.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="Schedule.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="Schedule.UpdatedIp" value="172.0.0.0" />
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Schedule.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Schedule.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+        
+
+    </script>
+}

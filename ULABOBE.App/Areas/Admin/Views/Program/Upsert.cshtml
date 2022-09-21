@@ -1,0 +1,121 @@
+﻿@model ULABOBE.Models.ViewModels.ProgramVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Program";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Program.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Program.Id" />
+            <input type="hidden" asp-for="Program.QueryId" />
+            <input type="hidden" asp-for="Program.CreatedBy" />
+            <input type="hidden" asp-for="Program.CreatedIp" />
+            <input type="hidden" asp-for="Program.CreatedDate" />
+            //edit
+            title = "Edit Program";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Program.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Program.Name" class="form-control" />
+                    <span asp-validation-for="Program.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Program.ProgramCode"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Program.ProgramCode" class="form-control" />
+                    <span asp-validation-for="Program.ProgramCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Program.ProgramURMSId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Program.ProgramURMSId" class="form-control" />
+                    <span asp-validation-for="Program.ProgramURMSId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Program.DepartmentId, Model.DepartmentList, "-Select a Department-",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Program.DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Program.Priority"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Program.Priority" class="form-control" />
+                    <span asp-validation-for="Program.Priority" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="Program.IsActive" value="true" />
+            <input type="hidden" asp-for="Program.IsDeleted" value="false" />
+            <input type="hidden" asp-for="Program.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="Program.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="Program.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="Program.UpdatedIp" value="172.0.0.0" />
+
+            @*<div class="form-group row">
+            <div class="col-4">
+                <label asp-for="IsActive"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>*@
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Program.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Program.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

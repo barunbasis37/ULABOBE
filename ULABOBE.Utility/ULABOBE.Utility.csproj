@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ProjectGuid>{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}</ProjectGuid>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ULABOBE.Models\ULABOBE.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EmailSender.cs" />
+    <Compile Include="SD.cs" />
+  </ItemGroup>
+</Project>

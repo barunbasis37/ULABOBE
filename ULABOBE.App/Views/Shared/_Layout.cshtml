@@ -1,0 +1,324 @@
+﻿@using ULABOBE.Utility
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ULAB OBE Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link href="~/css/typeahead.css" rel="stylesheet" />
+    <!-- CSS only -->
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ULAB OBE Application</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @if (User.IsInRole(SD.Role_SuperAdmin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseHistory" asp-action="Index">Course Details</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseCLO" asp-action="Index">Course And Course Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MappingCourseProgramLO" asp-action="Index">Mapping CLO with PLO</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseContent" asp-action="Index">Course Content</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseOutline" asp-action="Index">Course Outline</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="Index">Class Document</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramCatalog" asp-action="Index">Program Catalog</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseProgramMapping" asp-action="Index">Course Program Mapping</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseGenericSkill" asp-action="Index">Course And Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramProfessionalSkill" asp-action="Index">Program And Professional Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramPLO" asp-action="Index">Program with Program Learning outcomes</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentLAR" asp-action="Index">Department with Learning Assessment Rubric</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentGSkill" asp-action="Index">Department with Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearningResource" asp-action="Index">Course Learning Resource</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentTechniqueWeightage" asp-action="Index">Assessment Technique Weightage</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentPattern" asp-action="Index">Assessment Pattern</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Basic Setup
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="School" asp-action="Index">School</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Department" asp-action="Index">Department</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Program" asp-action="Index">Program</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Semester" asp-action="Index">Semester</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Course" asp-action="Index">Course</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Designation" asp-action="Index">Designation</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Instructor" asp-action="Index">Instructor</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LevelTerm" asp-action="Index">Level-Term</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SessionYear" asp-action="Index">Session-Year</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Section" asp-action="Index">Section</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseType" asp-action="Index">Course Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentType" asp-action="Index">Assessment Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearning" asp-action="Index">Course Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearningType" asp-action="Index">CLO Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramLearning" asp-action="Index">Program Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LearningResourceType" asp-action="Index">Learning Resource Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CoursePolicyType" asp-action="Index">Course Policy Type</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="BloomsCategory" asp-action="Index">Blooms Category</a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Correlation" asp-action="Index">Correlation</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="GenericSkillType" asp-action="Index">Generic Skill Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="GenericSkill" asp-action="Index">Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProfessionalSkill" asp-action="Index">Professional Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LearningAssessmentRubric" asp-action="Index">Learning Assessment Rubric</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SDGContribution" asp-action="Index">SDG Contribution</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CoursePolicyProcedure" asp-action="Index">Course Policy Procedure</a>
+                                    @*<a class="dropdown-item" asp-area="Admin" asp-controller="SDGContribution" asp-action="Index">SDG contribution</a>*@
+                                </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Report
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="School" asp-action="Print">School</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseProgramMapping" asp-action="PrintCourseProgramMapping">Course Program Mapping</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseProgramMapping" asp-action="PrintCourseProgramMappingAll">Course Program Mapping (All)</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                </div>
+                            </li>
+
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.Role_Administration))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseHistory" asp-action="Index">Course Details</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseCLO" asp-action="Index">Course And Course Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MappingCourseProgramLO" asp-action="Index">Mapping CLO with PLO</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseContent" asp-action="Index">Course Content</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramCatalog" asp-action="Index">Program Catalog</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseProgramMapping" asp-action="Index">Course Program Mapping</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseGenericSkill" asp-action="Index">Course And Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramProfessionalSkill" asp-action="Index">Program And Professional Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramPLO" asp-action="Index">Program with Program Learning outcomes</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentLAR" asp-action="Index">Department with Learning Assessment Rubric</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentGSkill" asp-action="Index">Department with Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearningResource" asp-action="Index">Course Learning Resource</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentTechniqueWeightage" asp-action="Index">Assessment Technique Weightage</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentPattern" asp-action="Index">Assessment Pattern</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CoursePolicyProcedure" asp-action="Index">Course Policy Procedure</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Basic Setup
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="School" asp-action="Index">School</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Department" asp-action="Index">Department</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Program" asp-action="Index">Program</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Semester" asp-action="Index">Semester</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Course" asp-action="Index">Course</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Designation" asp-action="Index">Designation</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Instructor" asp-action="Index">Instructor</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LevelTerm" asp-action="Index">Level-Term</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SessionYear" asp-action="Index">Session-Year</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Section" asp-action="Index">Section</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseType" asp-action="Index">Course Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AssessmentType" asp-action="Index">Assessment Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearning" asp-action="Index">Course Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseLearningType" asp-action="Index">CLO Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramLearning" asp-action="Index">Program Learning</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LearningResourceType" asp-action="Index">Learning Resource Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CoursePolicyType" asp-action="Index">Course Policy Type</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="BloomsCategory" asp-action="Index">Blooms Category</a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Correlation" asp-action="Index">Correlation</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="GenericSkillType" asp-action="Index">Generic Skill Type</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="GenericSkill" asp-action="Index">Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProfessionalSkill" asp-action="Index">Professional Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="LearningAssessmentRubric" asp-action="Index">Learning Assessment Rubric</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SDGContribution" asp-action="Index">SDG Contribution</a>
+
+                                    @*<a class="dropdown-item" asp-area="Admin" asp-controller="SDGContribution" asp-action="Index">SDG contribution</a>*@
+                                </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Report
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="School" asp-action="Print">School</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CourseProgramMapping" asp-action="PrintCourseProgramMapping">Course Program Mapping</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                </div>
+                            </li>
+                            </li>
+                        }
+
+
+                        @if (User.IsInRole(SD.Role_Faculty))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @*<a class="dropdown-item" href='@Url.Action("Index", "CourseHistory", new { area = "Advisor" })'>
+                                            Products/Manage/About
+                                        </a>*@
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseHistory" asp-action="Index">Course Details</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseCLO" asp-action="Index">Course And Course Learning</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="MappingCourseProgramLO" asp-action="Index">Mapping CLO with PLO</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseContent" asp-action="Index">Course Content</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseOutline" asp-action="Index">Course Outline</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentTechniqueWeightage" asp-action="Index">Assessment Technique Weightage</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentPattern" asp-action="Index">Assessment Pattern</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CoursePolicyProcedure" asp-action="Index">Course Policy Procedure</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseLearningResource" asp-action="Index">Course Learning Resource</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseProgramMapping" asp-action="Index">Course Program Mapping</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Report
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="School" asp-action="Print">School</a>
+
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseProgramMapping" asp-action="PrintCourseProgramMappingAll">Course Program Mapping</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                </div>
+                            </li>
+
+                        }
+                        @if (User.IsInRole(SD.Role_Employee))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramProfessionalSkill" asp-action="Index">Program And Professional Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramPLO" asp-action="Index">Program with Program Learning outcomes</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentLAR" asp-action="Index">Department with Learning Assessment Rubric</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentGSkill" asp-action="Index">Department with Generic Skill</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Report
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="School" asp-action="Print">School</a>
+
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentSDGContribution" asp-action="Index">Department with SDG contribution</a>
+                                </div>
+                            </li>
+
+                        }
+
+
+                        @if (User.IsInRole(SD.Role_SuperAdmin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @*<a class="dropdown-item" asp-area="Admin" asp-controller="UserType" asp-action="Index">User Type</a>*@
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Registration</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">User</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ImportUser">User Import</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MasterSetup" asp-action="Index">Master Setup</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="WeekDay" asp-action="Index">Week Day Setup</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Schedule" asp-action="Index">Schedule Setup</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Time" asp-action="Index">Time Setup</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ResetUserPassword">Reset Password</a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-white bg-primary">
+        <div class="container">
+            &copy; 2021 - All rights reserved ULAB
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/8f4bb5eabd.js"></script>
+    @*<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>*@
+    <script src="~/lib/typeahead.bundle.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>*@
+    <script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,158 @@
+﻿@model ULABOBE.Models.ViewModels.AssessmentPatternVM
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Assessment Pattern";
+}
+
+<link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.AssessmentPattern.Id != 0)
+        {
+
+            <input type="hidden" asp-for="AssessmentPattern.Id" />
+            <input type="hidden" asp-for="AssessmentPattern.QueryId" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedBy" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedIp" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedDate" />
+            //edit
+            title = "Edit Course Content";
+        }
+
+        @if (Model.AssessmentPattern.Id != 0)
+        {
+
+            <input type="hidden" asp-for="AssessmentPattern.Id" />
+
+            <input type="hidden" asp-for="AssessmentPattern.Id" />
+            <input type="hidden" asp-for="AssessmentPattern.QueryId" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedBy" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedIp" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedDate" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedBy" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedDate" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedIp" />
+
+        }
+        else
+        {
+
+            <input type="hidden" asp-for="AssessmentPattern.IsDeleted" value="false" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedIp" value="172.0.0.0" />
+        }
+
+
+
+
+
+
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Assessment Technique Weightages
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.AssessmentPattern.AssessmentTechWeightagesId, Model.AssessmentTechWeightagesLists, "-Select a Assessment Technique Weightages",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="AssessmentPattern.AssessmentTechWeightagesId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Blooms Category
+                </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.AssessmentPattern.BloomsCategoryId, Model.BloomsCategoryLists, "-Select a Blooms Category",
+                            new { @class = "form-control" })
+                        <span asp-validation-for="AssessmentPattern.BloomsCategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+            <input type="hidden" asp-for="AssessmentPattern.IsDeleted" value="false" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="AssessmentPattern.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="AssessmentPattern.UpdatedIp" value="172.0.0.0" />
+
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.AssessmentPattern.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.AssessmentPattern.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+            $(function () {
+                //normal dropdown
+                //$("#normalDropDown").chosen({
+                //    disable_search_threshold : 5
+                //});
+
+                //Multiselect DropDown
+                $("#multiSelectDropDown").chosen({
+                    width: "100%",
+                    placeholder: 'Select CLO'
+                });
+                $("#multiSelectDropDown").trigger("chosen:updated");
+                $("#multiSelectDropDown").trigger("liszt:updated");
+                $("#multiSelectDropDown").chosen().change();
+            });
+
+
+
+    </script>
+}

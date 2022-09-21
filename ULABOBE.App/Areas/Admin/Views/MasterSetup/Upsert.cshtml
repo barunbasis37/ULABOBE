@@ -1,0 +1,171 @@
+﻿@model ULABOBE.Models.ViewModels.MasterSetupVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Master Setup";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.MasterSetup.Id != 0)
+        {
+
+            <input type="hidden" asp-for="MasterSetup.Id" />
+            <input type="hidden" asp-for="MasterSetup.QueryId" />
+            <input type="hidden" asp-for="MasterSetup.CreatedBy" />
+            <input type="hidden" asp-for="MasterSetup.CreatedIp" />
+            <input type="hidden" asp-for="MasterSetup.CreatedDate" />
+            <input type="hidden" asp-for="MasterSetup.UpdatedBy" />
+            <input type="hidden" asp-for="MasterSetup.UpdatedIp" />
+            //edit
+            title = "Edit Master Setup";
+        }
+        else
+        {
+            <input type="hidden" asp-for="MasterSetup.IsDeleted" value="false" />
+            <input type="hidden" asp-for="MasterSetup.CreatedBy" value="N/A" />
+            <input type="hidden" asp-for="MasterSetup.CreatedIp" value="N/A" />
+            <input type="hidden" asp-for="MasterSetup.UpdatedBy" value="N/A" />
+            <input type="hidden" asp-for="MasterSetup.UpdatedIp" value="0.0.0.0" />
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="MasterSetup.StartDateTime"></label>
+                </div>
+                <div class="col-8">
+                    <div class='input-group date' id='startdatepicker'>
+                        @if (Model.MasterSetup.Id != 0)
+                        {
+
+                            <input asp-for="MasterSetup.StartDateTime" type="text" class="form-control" value="@Model.MasterSetup.StartDateTime" />
+                        }
+                        else
+                        {
+                            <input asp-for="MasterSetup.StartDateTime" type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
+                        }
+
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="MasterSetup.EndDateTime"></label>
+                </div>
+                <div class="col-8">
+
+                    <div class='input-group date' id='enddatepicker'>
+                        @if (Model.MasterSetup.Id != 0)
+                        {
+
+                            <input asp-for="MasterSetup.EndDateTime" type="text" class="form-control" value="@Model.MasterSetup.EndDateTime" />
+                        }
+                        else
+                        {
+                            <input asp-for="MasterSetup.EndDateTime" type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
+                        }
+
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="MasterSetup.EndDateTime" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Program
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.MasterSetup.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="MasterSetup.ProgramId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.MasterSetup.SemesterId, Model.SemesterLists, "-Select a Semester",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="MasterSetup.SemesterId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+            @*<div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="IsActive"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="IsActive" class="form-control" />
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+            </div>*@
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.MasterSetup.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.MasterSetup.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <script>
+        $(function () {
+            $('#startdatepicker').datetimepicker();
+            
+        });
+        $(function () {
+            
+            $('#enddatepicker').datetimepicker();
+        });
+    </script>
+    
+}

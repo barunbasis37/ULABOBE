@@ -1,0 +1,113 @@
+﻿@model ULABOBE.Models.ViewModels.ProgramPLOVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Program PLO";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.ProgramPLO.Id != 0)
+        {
+
+            <input type="hidden" asp-for="ProgramPLO.Id" />
+            <input type="hidden" asp-for="ProgramPLO.QueryId" />
+            <input type="hidden" asp-for="ProgramPLO.CreatedBy" />
+            <input type="hidden" asp-for="ProgramPLO.CreatedIp" />
+            <input type="hidden" asp-for="ProgramPLO.CreatedDate" />
+            //edit
+            title = "Edit Program PLO";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Program
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.ProgramPLO.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="ProgramPLO.ProgramId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Program Learning
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.ProgramPLO.PLOId, Model.ProgramLearningLists, "-Select a Program Learning",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="ProgramPLO.PLOId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProgramPLO.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="ProgramPLO.Description" class="form-control"></textarea>
+                    <span asp-validation-for="ProgramPLO.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="ProgramPLO.IsDeleted" value="false" />
+            <input type="hidden" asp-for="ProgramPLO.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramPLO.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="ProgramPLO.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramPLO.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.ProgramPLO.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.ProgramPLO.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

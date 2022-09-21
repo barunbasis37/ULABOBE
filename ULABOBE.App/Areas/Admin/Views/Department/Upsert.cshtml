@@ -1,0 +1,129 @@
+﻿@model ULABOBE.Models.ViewModels.DepartmentVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create School";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Department.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Department.Id" />
+            <input type="hidden" asp-for="Department.QueryId" />
+            <input type="hidden" asp-for="Department.CreatedBy" />
+            <input type="hidden" asp-for="Department.CreatedIp" />
+            <input type="hidden" asp-for="Department.CreatedDate" />
+            //edit
+            title = "Edit School";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Department.Type"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Department.Type" class="form-control" />
+                    <span asp-validation-for="Department.Type" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Department.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Department.Name" class="form-control" />
+                    <span asp-validation-for="Department.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Department.DepartmentCode"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Department.DepartmentCode" class="form-control" />
+                    <span asp-validation-for="Department.DepartmentCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Department.SchoolId, Model.SchoolList, "-Select a School",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Department.SchoolId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Department.Description"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Department.Description" class="form-control" />
+                    <span asp-validation-for="Department.Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Department.Priority"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Department.Priority" class="form-control" />
+                    <span asp-validation-for="Department.Priority" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="Department.IsActive" value="true" />
+            <input type="hidden" asp-for="Department.IsDeleted" value="false" />
+            <input type="hidden" asp-for="Department.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="Department.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="Department.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="Department.UpdatedIp" value="172.0.0.0" />
+
+            @*<div class="form-group row">
+            <div class="col-4">
+                <label asp-for="IsActive"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>*@
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Department.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Department.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

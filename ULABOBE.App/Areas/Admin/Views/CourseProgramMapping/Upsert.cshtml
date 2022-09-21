@@ -1,0 +1,272 @@
+﻿@model ULABOBE.Models.ViewModels.CourseProgramMappingVM
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Course Program Mapping";
+}
+
+<link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        @*<div>@Model.CourseProgramMapping.CourseHistory.Semester.Name</div>*@
+        
+
+        @if (Model.CourseProgramMapping.Id != 0)
+        {
+
+
+            <input type="hidden" asp-for="CourseProgramMapping.Id" />
+            <input type="hidden" asp-for="CourseProgramMapping.QueryId" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedBy" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedIp" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedDate" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedBy" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedDate" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedIp" />
+
+        }
+        else
+        {
+            <input type="hidden" asp-for="CourseProgramMapping.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedIp" value="0.0.0.0" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedIp" value="0.0.0.0" />
+            <input type="hidden" asp-for="CourseProgramMapping.ApprovedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.ApprovedIp" value="0.0.0.0" />
+        }
+
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseProgramMapping.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course Info",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseProgramMapping.CourseHistoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning Outcome
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseProgramMapping.CourseLearningId, Model.CourseLearningLists, "-Select a Course Learning",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseProgramMapping.CourseLearningId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Program Learning
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.PLoSelectedIDArray, Model.ProgramLearningLists, new { @class = "select-chosen form-control", @tabindex = "2", @id = "plomultiSelectDropDown" })
+
+
+                    <span asp-validation-for="PLoSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Generic Skill
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.GSSelectedIDArray, Model.GenericSkillLists, new { @class = "select-chosen form-control", @tabindex = "3", @id = "gsmultiSelectDropDown" })
+
+
+                    <span asp-validation-for="GSSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Professional Skill
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.PSSelectedIDArray, Model.ProfessionalSkillLists, new { @class = "select-chosen form-control", @tabindex = "4", @id = "psmultiSelectDropDown" })
+
+
+                    <span asp-validation-for="PSSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    SDG Contribution
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.SDGSelectedIDArray, Model.SDGLists, new { @class = "select-chosen1 form-control", @tabindex = "5", @id = "sdgmultiSelectDropDown" })
+
+
+                    <span asp-validation-for="SDGSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Learning AR
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.ARSelectedIDArray, Model.LearningAssessmentRubricLists, new { @class = "select-chosen form-control", @tabindex = "6", @id = "armultiSelectDropDown" })
+
+
+                    <span asp-validation-for="ARSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+            @if (Model.CourseProgramMapping.Id != 0)
+            {
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CourseProgramMapping.IsApproved"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CourseProgramMapping.IsApproved" class="form-control" />
+                        <span asp-validation-for="CourseProgramMapping.IsApproved" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+
+
+            <input type="hidden" asp-for="CourseProgramMapping.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.CreatedIp" value="0.0.0.0" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.UpdatedIp" value="0.0.0.0" />
+            <input type="hidden" asp-for="CourseProgramMapping.ApprovedBy" value="000000" />
+            <input type="hidden" asp-for="CourseProgramMapping.ApprovedIp" value="0.0.0.0" />
+
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.CourseProgramMapping.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.CourseProgramMapping.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+        $(function () {
+
+            //Multiselect DropDown
+            $("#plomultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select PLO'
+            });
+            $("#plomultiSelectDropDown").trigger("chosen:updated");
+            $("#plomultiSelectDropDown").trigger("liszt:updated");
+            $("#plomultiSelectDropDown").chosen().change();
+
+        });
+        $(function () {
+
+            $("#gsmultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select GS'
+            });
+            $("#gsmultiSelectDropDown").trigger("chosen:updated");
+            $("#gsmultiSelectDropDown").trigger("liszt:updated");
+            $("#gsmultiSelectDropDown").chosen().change();
+
+        });
+
+        $(function () {
+
+
+            $("#psmultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select PS'
+            });
+            $("#psmultiSelectDropDown").trigger("chosen:updated");
+            $("#psmultiSelectDropDown").trigger("liszt:updated");
+            $("#psmultiSelectDropDown").chosen().change();
+
+        });
+
+        $(function () {
+
+            $("#sdgmultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select SDG'
+            });
+            $("#sdgmultiSelectDropDown").trigger("chosen:updated");
+            $("#sdgmultiSelectDropDown").trigger("liszt:updated");
+            $("#sdgmultiSelectDropDown").chosen().change();
+
+        });
+
+        $(function () {
+
+            $("#armultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select AR'
+            });
+            $("#armultiSelectDropDown").trigger("chosen:updated");
+            $("#armultiSelectDropDown").trigger("liszt:updated");
+            $("#armultiSelectDropDown").chosen().change();
+
+
+        });
+
+        
+
+    </script>
+    @*$(document).ready(function () {
+
+    $('.select-chosen1').chosen();
+    });*@
+    
+}

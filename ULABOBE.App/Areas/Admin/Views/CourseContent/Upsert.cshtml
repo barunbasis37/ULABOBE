@@ -1,0 +1,222 @@
+﻿@model ULABOBE.Models.ViewModels.CourseContentVM
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Course Content";
+}
+
+<link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.CourseContent.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseContent.Id" />
+            <input type="hidden" asp-for="CourseContent.QueryId" />
+            <input type="hidden" asp-for="CourseContent.CreatedBy" />
+            <input type="hidden" asp-for="CourseContent.CreatedIp" />
+            <input type="hidden" asp-for="CourseContent.CreatedDate" />
+            //edit
+            title = "Edit Course Content";
+        }
+
+        @if (Model.CourseContent.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseContent.Id" />
+            
+            <input type="hidden" asp-for="CourseContent.Id" />
+            <input type="hidden" asp-for="CourseContent.QueryId" />
+            <input type="hidden" asp-for="CourseContent.CreatedBy" />
+            <input type="hidden" asp-for="CourseContent.CreatedIp" />
+            <input type="hidden" asp-for="CourseContent.CreatedDate" />
+            <input type="hidden" asp-for="CourseContent.UpdatedBy" />
+            <input type="hidden" asp-for="CourseContent.UpdatedDate" />
+            <input type="hidden" asp-for="CourseContent.UpdatedIp" />
+            
+        }
+        else
+        {
+            
+            <input type="hidden" asp-for="CourseContent.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseContent.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseContent.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseContent.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseContent.UpdatedIp" value="172.0.0.0" />
+        }
+
+
+
+
+
+
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseContent.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course Info",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseContent.CourseHistoryId" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group row">
+            <div class="col-4">
+                Session
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseContent.SemesterId, Model.SemesterLists, "-Select a Semester",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseContent.SemesterId" class="text-danger"></span>
+            </div>
+        </div>*@
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+                    @*@Html.DropDownListFor(m => m.CourseLearningSelectedIdArray, Model.CourseLearningLists, "-Select a Course Learning",
+                new { id = "multiSelectDropDown", multiple = "multiple", @class = "form-control" })*@
+
+                    @*@Html.ListBoxFor(model => model.SubjectsIds, new MultiSelectList(Model.drpSubjects, "Value", "Text"), new { @class = "form-control", multiple = "multiple", id = "Subjects_dropdown" })*@
+
+
+                    @Html.ListBoxFor(m => m.CourseLearningSelectedIdArray, Model.CourseLearningLists, new { @class = "select-chosen form-control", @tabindex = "2", @id = "multiSelectDropDown" })
+
+                    @*@Html.DropDownListFor(m => m.CourseLearningSelectedIdArray, new MultiSelectList(Model.CourseLearningLists,"Value","Text","Selected"), "-Select a Course Learning",
+                new { id = "multiSelectDropDown", multiple = "multiple", @class = "form-control" })*@
+                    <span asp-validation-for="CourseLearningSelectedIdArray" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Learning AR
+                </div>
+                <div class="col-8">
+
+                    @Html.ListBoxFor(m => m.ARSelectedIDArray, Model.LearningAssessmentRubricLists, new { @class = "select-chosen form-control", @tabindex = "6", @id = "armultiSelectDropDown" })
+
+
+                    <span asp-validation-for="ARSelectedIDArray" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseContent.Topic"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="CourseContent.Topic" class="form-control"></textarea>
+                    <span asp-validation-for="CourseContent.Topic" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseContent.SessionQuantity"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CourseContent.SessionQuantity" class="form-control" />
+                    <span asp-validation-for="CourseContent.SessionQuantity" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+            <input type="hidden" asp-for="CourseContent.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseContent.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseContent.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseContent.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseContent.UpdatedIp" value="172.0.0.0" />
+
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.CourseContent.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.CourseContent.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+   
+            $(function () {
+                //normal dropdown
+                //$("#normalDropDown").chosen({
+                //    disable_search_threshold : 5
+                //});
+
+                //Multiselect DropDown
+                $("#multiSelectDropDown").chosen({
+                    width: "100%",
+                    placeholder: 'Select CLO'
+                });
+                $("#multiSelectDropDown").trigger("chosen:updated");
+                $("#multiSelectDropDown").trigger("liszt:updated");
+                $("#multiSelectDropDown").chosen().change();
+            });
+        $(function () {
+
+            $("#armultiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select AR'
+            });
+            $("#armultiSelectDropDown").trigger("chosen:updated");
+            $("#armultiSelectDropDown").trigger("liszt:updated");
+            $("#armultiSelectDropDown").chosen().change();
+
+
+        });
+ 
+
+    </script>
+}

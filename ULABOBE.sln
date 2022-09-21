@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ULABOBE.DataAccess", "ULABOBE.DataAccess\ULABOBE.DataAccess.csproj", "{A08246E9-1A74-4838-8404-374B5B41EBBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ULABOBE.App", "ULABOBE.App\ULABOBE.App.csproj", "{C6CDEE71-3455-4162-8677-A34C9786A546}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ULABOBE.Models", "ULABOBE.Models\ULABOBE.Models.csproj", "{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ULABOBE.Utility", "ULABOBE.Utility\ULABOBE.Utility.csproj", "{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ULABOBE.ReportModel", "ULABOBE.ReportModel\ULABOBE.ReportModel.csproj", "{614545AC-3D5B-4953-B596-B046854E9E48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ULABOBE.WinApp", "ULABOBE.WinApp\ULABOBE.WinApp.csproj", "{7308CA16-184A-468D-9D4E-B8056AB3D5CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A08246E9-1A74-4838-8404-374B5B41EBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A08246E9-1A74-4838-8404-374B5B41EBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A08246E9-1A74-4838-8404-374B5B41EBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A08246E9-1A74-4838-8404-374B5B41EBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6CDEE71-3455-4162-8677-A34C9786A546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CDEE71-3455-4162-8677-A34C9786A546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CDEE71-3455-4162-8677-A34C9786A546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CDEE71-3455-4162-8677-A34C9786A546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADDF721-C81F-43A9-AC24-ABA9511FAB20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{614545AC-3D5B-4953-B596-B046854E9E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{614545AC-3D5B-4953-B596-B046854E9E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{614545AC-3D5B-4953-B596-B046854E9E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{614545AC-3D5B-4953-B596-B046854E9E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7308CA16-184A-468D-9D4E-B8056AB3D5CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7308CA16-184A-468D-9D4E-B8056AB3D5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7308CA16-184A-468D-9D4E-B8056AB3D5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7308CA16-184A-468D-9D4E-B8056AB3D5CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A194307B-7F98-47FC-8B5D-0E6B4A20C555}
+	EndGlobalSection
+EndGlobal

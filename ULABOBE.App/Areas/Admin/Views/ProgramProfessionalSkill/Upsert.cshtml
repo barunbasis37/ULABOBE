@@ -1,0 +1,113 @@
+﻿@model ULABOBE.Models.ViewModels.ProgramProfessionalSkillVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Program Professional Skill";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.ProgramProfessionalSkill.Id != 0)
+        {
+
+            <input type="hidden" asp-for="ProgramProfessionalSkill.Id" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.QueryId" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.CreatedBy" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.CreatedIp" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.CreatedDate" />
+            //edit
+            title = "Edit Program Professional Skill";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.ProgramProfessionalSkill.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="ProgramProfessionalSkill.ProgramId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Professional Skill
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.ProgramProfessionalSkill.PPSkillId, Model.ProfessionalSkillLists, "-Select a Professional Skill",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="ProgramProfessionalSkill.PPSkillId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProgramProfessionalSkill.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="ProgramProfessionalSkill.Description" class="form-control"></textarea>
+                    <span asp-validation-for="ProgramProfessionalSkill.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="ProgramProfessionalSkill.IsDeleted" value="false" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramProfessionalSkill.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.ProgramProfessionalSkill.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.ProgramProfessionalSkill.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

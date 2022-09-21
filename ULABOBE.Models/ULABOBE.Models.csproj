@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ProjectGuid>{2DBF8D4B-CA08-429F-BC9E-7E8914D3AB19}</ProjectGuid>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationUser.cs" />
+    <Compile Include="AssessmentTechniqueWeightage.cs" />
+    <Compile Include="AssessmentType.cs" />
+    <Compile Include="BloomsCategory.cs" />
+    <Compile Include="Correlation.cs" />
+    <Compile Include="Course.cs" />
+    <Compile Include="CourseClassDocument.cs" />
+    <Compile Include="CourseCLO.cs" />
+    <Compile Include="AssessmentPattern.cs" />
+    <Compile Include="CourseOutline.cs" />
+    <Compile Include="CoursePolicyProcedure.cs" />
+    <Compile Include="CourseLearningResource.cs" />
+    <Compile Include="CourseContent.cs" />
+    <Compile Include="CourseGenericSkill.cs" />
+    <Compile Include="CourseHistory.cs" />
+    <Compile Include="CourseLearning.cs" />
+    <Compile Include="CourseLearningType.cs" />
+    <Compile Include="CoursePoliciesType.cs" />
+    <Compile Include="CourseProgramMapping.cs" />
+    <Compile Include="CourseType.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="DepartmentLAR.cs" />
+    <Compile Include="DepartmentSDGContribution.cs" />
+    <Compile Include="Designation.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="GenericSkill.cs" />
+    <Compile Include="GenericSkillType.cs" />
+    <Compile Include="Instructor.cs" />
+    <Compile Include="LearningAssesmentRubric.cs" />
+    <Compile Include="LearningResourceType.cs" />
+    <Compile Include="MappingCourseProgramLO.cs" />
+    <Compile Include="MasterSetup.cs" />
+    <Compile Include="ProfessionalSkill.cs" />
+    <Compile Include="ProgramCatalog.cs" />
+    <Compile Include="ProgramData.cs" />
+    <Compile Include="ProgramLearning.cs" />
+    <Compile Include="DepartmentGSkill.cs" />
+    <Compile Include="ProgramPLO.cs" />
+    <Compile Include="ProgramProfessionalSkill.cs" />
+    <Compile Include="ReportViewModels\CourseClassDocumentRVM.cs" />
+    <Compile Include="ReportViewModels\CourseOutlineRVM.cs" />
+    <Compile Include="ReportViewModels\CourseProgramMappingRVM.cs" />
+    <Compile Include="Schedule.cs" />
+    <Compile Include="School.cs" />
+    <Compile Include="SDGContribution.cs" />
+    <Compile Include="Section.cs" />
+    <Compile Include="Semester.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="Term.cs" />
+    <Compile Include="Time.cs" />
+    <Compile Include="UserInfoCheck.cs" />
+    <Compile Include="UserType.cs" />
+    <Compile Include="ViewModels\AssessmentPatternVM.cs" />
+    <Compile Include="ViewModels\CourseCLOVM.cs" />
+    <Compile Include="ViewModels\CourseHistoryFVM.cs" />
+    <Compile Include="ViewModels\CourseClassDocumentVM.cs" />
+    <Compile Include="ViewModels\CourseOutlineVM.cs" />
+    <Compile Include="ViewModels\CoursePolicyProcedureVM.cs" />
+    <Compile Include="ViewModels\CourseLearningResourceVM.cs" />
+    <Compile Include="ViewModels\CourseProgramMappingVM.cs" />
+    <Compile Include="ViewModels\CourseContentVM.cs" />
+    <Compile Include="ViewModels\CourseGenericSkillVM.cs" />
+    <Compile Include="ViewModels\CourseHistoryVM.cs" />
+    <Compile Include="ViewModels\CourseLearningVM.cs" />
+    <Compile Include="ViewModels\AssessmentTechniqueWeightageVM.cs" />
+    <Compile Include="ViewModels\CourseVM.cs" />
+    <Compile Include="ViewModels\DepartmentGSkillVM.cs" />
+    <Compile Include="ViewModels\DepartmentLARVM.cs" />
+    <Compile Include="ViewModels\DepartmentSDGContributionVM.cs" />
+    <Compile Include="ViewModels\DepartmentVM.cs" />
+    <Compile Include="ViewModels\GenericSkillVM.cs" />
+    <Compile Include="ViewModels\InstructorVM.cs" />
+    <Compile Include="ViewModels\MappingCourseProgramLOVM.cs" />
+    <Compile Include="ViewModels\MasterSetupVM.cs" />
+    <Compile Include="ViewModels\ProgramCatalogVM.cs" />
+    <Compile Include="ViewModels\ProgramPLOVM.cs" />
+    <Compile Include="ViewModels\ProgramProfessionalSkillVM.cs" />
+    <Compile Include="ViewModels\ProgramVM.cs" />
+    <Compile Include="ViewModels\ResetUserPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleVM.cs" />
+    <Compile Include="ViewModels\SemesterVM.cs" />
+    <Compile Include="WeekDay.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,73 @@
+﻿@model ULABOBE.Models.Time
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Time";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Id != 0)
+        {
+            @Html.HiddenFor(model => model.Id);
+            @Html.HiddenFor(model => model.QueryId);
+            @Html.HiddenFor(model => model.CreatedBy);
+            @Html.HiddenFor(model => model.CreatedDate);
+            @Html.HiddenFor(model => model.CreatedIp);
+            @Html.HiddenFor(model => model.UpdatedBy);
+            @Html.HiddenFor(model => model.UpdatedDate);
+            @Html.HiddenFor(model => model.UpdatedIp);
+            //edit
+            title = "Edit Time";
+        }
+        else
+        {
+            <input type="hidden" asp-for="CreatedBy" class="form-control" value="N/A" />
+            <input type="hidden" asp-for="CreatedIp" class="form-control" value="0.0.0.0" />
+            <input type="hidden" asp-for="UpdatedBy" class="form-control" value="N/A" />
+            <input type="hidden" asp-for="UpdatedIp" class="form-control" value="0.0.0.0" />
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_CreateAndBackToListButton" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

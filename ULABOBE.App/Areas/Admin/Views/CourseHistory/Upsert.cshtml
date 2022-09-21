@@ -1,0 +1,182 @@
+﻿@model ULABOBE.Models.ViewModels.CourseHistoryVM
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Course Deatils";
+}
+
+<link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.CourseHistory.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseHistory.Id" />
+            <input type="hidden" asp-for="CourseHistory.SemesterId" />
+            <input type="hidden" asp-for="CourseHistory.QueryId" />
+            <input type="hidden" asp-for="CourseHistory.CreatedBy" />
+            <input type="hidden" asp-for="CourseHistory.CreatedIp" />
+            <input type="hidden" asp-for="CourseHistory.CreatedDate" />
+            <input type="hidden" asp-for="CourseHistory.UpdatedBy" />
+            <input type="hidden" asp-for="CourseHistory.UpdatedDate" />
+            <input type="hidden" asp-for="CourseHistory.UpdatedIp" />
+            //edit
+            title = "Edit Course Details";
+        }
+        else
+        {
+            <input type="hidden" asp-for="CourseHistory.SemesterId" value="1" />
+            <input type="hidden" asp-for="CourseHistory.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseHistory.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseHistory.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseHistory.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseHistory.UpdatedIp" value="172.0.0.0" />
+        }
+    <div class="col-12 border-bottom">
+        <h2 class="text-primary">@title</h2>
+        <h4 class="text-danger">@ViewBag.Message</h4>
+        
+    </div>
+    <div class="col-8 pt-4">
+        <div class="form-group row">
+            <div class="col-4">
+                Course
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseHistory.CourseId, Model.CourseLists, "-Select a Course",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseHistory.CourseId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                Section
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseHistory.SectionId, Model.SectionLists, "-Select a Section",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseHistory.SectionId" class="text-danger"></span>
+            </div>
+        </div>
+
+        @*<div class="form-group row">
+            <div class="col-4">
+                Level/Term
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseHistory.SemesterId, Model.SemesterLists, "-Select a Semester",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseHistory.SemesterId" class="text-danger"></span>
+            </div>
+        </div>*@
+
+        <div class="form-group row">
+            <div class="col-4">
+                Instructor
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.CourseHistory.InstructorId, Model.InstructorLists, "-Select a Instructor",
+                    new { @class = "form-control" })
+                <span asp-validation-for="CourseHistory.InstructorId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                Schedule
+            </div>
+            <div class="col-8">
+                @Html.ListBoxFor(m => m.ScheduleSelectedIdArray, Model.ScheduleLists, new { @class = "select-chosen form-control", @tabindex = "2", @id = "multiSelectDropDown" })
+                @*<textarea asp-for="CourseHistory.ScheduleIDs" class="form-control"></textarea>*@
+                <span asp-validation-for="ScheduleSelectedIdArray" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="CourseHistory.CIEMarks"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="CourseHistory.CIEMarks" class="form-control" />
+                <span asp-validation-for="CourseHistory.CIEMarks" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="CourseHistory.SEEMarks"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="CourseHistory.SEEMarks" class="form-control" />
+                <span asp-validation-for="CourseHistory.SEEMarks" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        @*<div class="form-group row">
+            <div class="col-4">
+                <label asp-for="IsActive"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>*@
+        <br />
+        <div class="form-group row">
+            <div class="col-8 offset-4">
+                @if (Model.CourseHistory.Id != 0)
+                {
+
+                    <partial name="_EditAndBackToListButton" model="Model.CourseHistory.Id" />
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+        $(function () {
+
+            //Multiselect DropDown
+            $("#multiSelectDropDown").chosen({
+                width: "100%",
+                placeholder: 'Select CLO'
+            });
+            $("#multiSelectDropDown").trigger("chosen:updated");
+            $("#multiSelectDropDown").trigger("liszt:updated");
+            $("#multiSelectDropDown").chosen().change();
+        });
+
+    </script>
+}

@@ -1,0 +1,289 @@
+﻿@model ULABOBE.Models.ViewModels.MappingCourseProgramLOVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Mapping CLO with PLO";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.MappingCourseProgramLO.Id != 0)
+        {
+
+            <input type="hidden" asp-for="MappingCourseProgramLO.Id" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.QueryId" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.CreatedBy" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.CreatedIp" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.CreatedDate" />
+            //edit
+            title = "Edit Mapping CLO with PLO";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Instructor
+                </div>
+                <div class="col-8">
+                    <b>@ViewBag.InstructorInfo</b>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <b>@ViewBag.Semester</b>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.MappingCourseProgramLO.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course",
+                        new { id = "CourseHId", @class = "form-control" })
+                    <span asp-validation-for="MappingCourseProgramLO.CourseHistoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Program
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.MappingCourseProgramLO.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @id = "ProgramId", @class = "form-control" })
+                    <span asp-validation-for="MappingCourseProgramLO.ProgramId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+                    @*<select id="cloId" class="form-control" asp-for="MappingCourseProgramLO.CLOId" asp-items="@(new SelectList("  "))">
+                    <option value="">Select Course</option>
+                </select>
+                    *@
+                    @Html.DropDownListFor(m => m.MappingCourseProgramLO.CourseLearningId, Model.CourseLearningLists, "--Select CLO--", new { @id = "CLOId", @class = "form-control" })
+                    <span asp-validation-for="MappingCourseProgramLO.CourseLearningId" class="text-danger"></span>
+
+                </div>
+
+            </div>
+
+            @if (Model.MappingCourseProgramLO.Id != 0)
+            {
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        Program Learning
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.MappingCourseProgramLO.ProgramPLOId, Model.ProgramPLOLists, "--Select PLO--", new { @id = "PLOId", @class = "form-control" })
+                        <span asp-validation-for="MappingCourseProgramLO.ProgramPLOId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                @*<div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+
+                    @Html.DropDownListFor(m => m.MappingCourseProgramLO.CourseLearningId, new SelectList(" "), "--Select CLO--", new { @id = "CLOId", @class = "form-control" })
+                    <span asp-validation-for="MappingCourseProgramLO.CourseLearningId" class="text-danger"></span>
+
+                </div>
+
+            </div>*@
+                <div class="form-group row">
+                    <div class="col-4">
+                        Program Learning
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.MappingCourseProgramLO.ProgramPLOId, new SelectList(" "), "--Select PLO--", new { @id = "PLOId", @class = "form-control" })
+                        <span asp-validation-for="MappingCourseProgramLO.ProgramPLOId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            }
+            <div class="form-group row">
+                <div class="col-4">
+                    Program Learning
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.MappingCourseProgramLO.CorrelationId, Model.CorrelationLists, "-Select a Correlation",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="MappingCourseProgramLO.CorrelationId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="MappingCourseProgramLO.IsDeleted" value="false" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="MappingCourseProgramLO.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.MappingCourseProgramLO.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.MappingCourseProgramLO.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+    @*<script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#CourseHId").change(function () {
+
+                    var cloSelected = $("#CLOId");
+                    cloSelected.empty();
+                    $.get("../CourseCLO/GetDAll",
+                        { CourseHistoryId: $("#CourseHId").val() },
+                        function (data) {
+                            cloSelected.empty();
+                            $.each(data, function (index, row) {
+                                cloSelected.append("<option value='" + row.value + "'>" + row.text + "</option>");
+                            });
+                        });
+                });
+
+            });
+
+        </script>*@
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#ProgramId").change(function () {
+
+                var ploSelected = $("#PLOId");
+                ploSelected.empty();
+                $.get("../ProgramPLO/GetDAll",
+                    { ProgramId: $("#ProgramId").val() },
+                    function (data) {
+                        ploSelected.empty();
+                        $.each(data, function (index, row) {
+                            ploSelected.append("<option value='" + row.value + "'>" + row.text + "</option>")
+                        });
+                    });
+            });
+        });
+
+
+            //$(document).ready(function() {
+            //    $("#courseId").change(function() {
+            //        var courseSelected = $("#courseId").val();
+
+            //        var cloSelected = $("#cloId");
+            //        cloSelected.empty();
+
+            //        if (courseSelected != null && courseSelected !== '') {
+
+            //            $.getJSON("../CourseCLO/GetDAll/"), { CourseId: courseSelected, }, function(clos) {
+            //                if (clos != null && jQuery.isEmptyObject(clos)) {
+            //                    cloSelected.append($('<option>',
+            //                        {
+            //                            value: null,
+            //                            text: "Select CLO"
+            //                        }));
+            //                    $.each(clos,
+            //                        function(index, itemData) {
+            //                            cloSelected.append($('<option/>',
+            //                                {
+            //                                    value: itemData.Value,
+            //                                    text: itemData.Text
+            //                                }));
+            //                        });
+            //                };
+            //            };
+            //        }
+            //    });
+    </script>
+
+
+
+
+
+
+
+    @*<script language="javascript" type="text/javascript">
+
+
+        function GetCLO(_courseId) {
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $("#cloList").html(procemessage).show();
+            var url = "~/CourseCLO/GetDAll/";
+
+            $.ajax({
+                url: url,
+                data: { CourseId: _courseId },
+                cache: false,
+                type: "POST",
+                success: function(data) {
+                    var markup = "<option value='0'>Select CLO</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $("#cloList").html(markup).show();
+                },
+                error: function(reponse) {
+                    alert("error : " + reponse.message);
+                }
+            });
+
+        }
+        </script>*@
+}

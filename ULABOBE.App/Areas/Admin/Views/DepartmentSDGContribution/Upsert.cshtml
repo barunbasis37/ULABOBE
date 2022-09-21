@@ -1,0 +1,133 @@
+﻿@model ULABOBE.Models.ViewModels.DepartmentSDGContributionVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Department with SDG Contribution";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.DepartmentSDGContribution.Id != 0)
+        {
+
+            <input type="hidden" asp-for="DepartmentSDGContribution.Id" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.QueryId" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.CreatedBy" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.CreatedIp" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.CreatedDate" />
+            //edit
+            title = "Edit Department with SDG Contribution";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentSDGContribution.DepartmentId, Model.DepartmentLists, "-Select a Department",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentSDGContribution.DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Session
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentSDGContribution.SemesterId, Model.SemesterLists, "-Select a Semester",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentSDGContribution.SemesterId" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <div class="col-4">
+                    Term/Level
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentSDGContribution.LevelTermId, Model.TermLevelLists, "-Select a Level/Term",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentSDGContribution.LevelTermId" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentSDGContribution.SDGConId, Model.SDGContributionLists, "-Select a SDG Contribution",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentSDGContribution.SDGConId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="DepartmentSDGContribution.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="DepartmentSDGContribution.Description" class="form-control"></textarea>
+                    <span asp-validation-for="DepartmentSDGContribution.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="DepartmentSDGContribution.IsDeleted" value="false" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="DepartmentSDGContribution.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.DepartmentSDGContribution.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.DepartmentSDGContribution.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

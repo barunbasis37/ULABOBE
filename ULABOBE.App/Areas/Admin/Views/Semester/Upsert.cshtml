@@ -1,0 +1,143 @@
+﻿@model ULABOBE.Models.ViewModels.SemesterVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Semester";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Semester.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Semester.Id" />
+            <input type="hidden" asp-for="Semester.QueryId" />
+            <input type="hidden" asp-for="Semester.CreatedBy" />
+            <input type="hidden" asp-for="Semester.CreatedIp" />
+            <input type="hidden" asp-for="Semester.CreatedDate" />
+            //edit
+            title = "Edit Semester";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Semester.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Semester.Name" class="form-control" />
+                    <span asp-validation-for="Semester.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Semester.Code"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Semester.Code" class="form-control" />
+                    <span asp-validation-for="Semester.Code" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Semester.StartDateTime"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Semester.StartDateTime" class="form-control" />
+                    <span asp-validation-for="Semester.StartDateTime" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Semester.EndDateTime"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Semester.EndDateTime" class="form-control" />
+                    <span asp-validation-for="Semester.EndDateTime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Level/Term
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Semester.TermId, Model.TermLists, "-Select a Term",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Semester.TermId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Session/Year
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Semester.SessionId, Model.SessionLists, "-Select a Year",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Semester.SessionId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+            <input type="hidden" asp-for="Semester.IsDeleted" value="false" />
+            <input type="hidden" asp-for="Semester.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="Semester.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="Semester.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="Semester.UpdatedIp" value="172.0.0.0" />
+
+            @*<div class="form-group row">
+            <div class="col-4">
+                <label asp-for="IsActive"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>*@
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Semester.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Semester.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        
+
+
+    </script>
+}

@@ -1,0 +1,150 @@
+﻿@model ULABOBE.Models.ViewModels.CourseLearningVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Course Learning";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.CourseLearning.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseLearning.Id" />
+            <input type="hidden" asp-for="CourseLearning.QueryId" />
+            <input type="hidden" asp-for="CourseLearning.CreatedBy" />
+            <input type="hidden" asp-for="CourseLearning.CreatedIp" />
+            <input type="hidden" asp-for="CourseLearning.CreatedDate" />
+            //edit
+            title = "Edit Course Learning";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseLearning.CLOCode"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CourseLearning.CLOCode" class="form-control" />
+                    <span asp-validation-for="CourseLearning.CLOCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseLearning.CLOTypeId, Model.CourseLearningTypeLists, "-Select a Course Learning Type",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseLearning.CLOTypeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseLearning.IsActive"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CourseLearning.IsActive" class="form-control" />
+                    <span asp-validation-for="CourseLearning.IsActive" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CourseLearning.PriorityLevel"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CourseLearning.PriorityLevel" class="form-control" />
+                    <span asp-validation-for="CourseLearning.PriorityLevel" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <input type="hidden" asp-for="CourseLearning.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseLearning.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseLearning.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseLearning.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseLearning.UpdatedIp" value="172.0.0.0" />
+
+           
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.CourseLearning.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.CourseLearning.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+       
+
+        //function validateInput() {
+        //    if (document.getElementById("uploadBox").value == "") {
+        //        swal("Error", "Please select an image", "error");
+        //        return false;
+        //    }
+        //    return true;
+        //};
+
+        //typeahead start
+        //$(document).ready(function () {
+
+        //    var vm = {};
+        //    var issuers = new Bloodhound({
+        //        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('issuerId'),
+        //        queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+        //        remote: {
+        //            url: '/Admin/IssueInitiate/GetAllIssuer?query=%QUERY',
+        //            wildcard: '%QUERY'
+        //        }
+        //    });
+
+        //    $('#IssuerId').typeahead({
+        //        minLength: 2,
+        //        highlight: true
+        //    }, {
+        //        name: 'issuers',
+        //        display: 'issuerId',
+        //        source: issuers
+        //    }).on("typeahead: select", function (e, issuerId) {
+        //        vm.issuerId = IssuerId.IssuerId;
+        //    });
+
+        //});
+
+        //typeahead end
+
+    </script>
+}

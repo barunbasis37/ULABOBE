@@ -1,0 +1,133 @@
+﻿@model ULABOBE.Models.ViewModels.DepartmentLARVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Department with LAR";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.DepartmentLAR.Id != 0)
+        {
+
+            <input type="hidden" asp-for="DepartmentLAR.Id" />
+            <input type="hidden" asp-for="DepartmentLAR.QueryId" />
+            <input type="hidden" asp-for="DepartmentLAR.CreatedBy" />
+            <input type="hidden" asp-for="DepartmentLAR.CreatedIp" />
+            <input type="hidden" asp-for="DepartmentLAR.CreatedDate" />
+            //edit
+            title = "Edit Department with LAR";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentLAR.DepartmentId, Model.DepartmentLists, "-Select a Department",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentLAR.DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Session
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentLAR.SemesterId, Model.SemesterLists, "-Select a Semester",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentLAR.SemesterId" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <div class="col-4">
+                    Term/Level
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentLAR.LevelTermId, Model.TermLevelLists, "-Select a Level/Term",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentLAR.LevelTermId" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="form-group row">
+                <div class="col-4">
+                    Course Learning
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.DepartmentLAR.LARId, Model.LearningARLists, "-Select a Learning Assessment Rubric",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="DepartmentLAR.LARId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="DepartmentLAR.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="DepartmentLAR.Description" class="form-control"></textarea>
+                    <span asp-validation-for="DepartmentLAR.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <input type="hidden" asp-for="DepartmentLAR.IsDeleted" value="false" />
+            <input type="hidden" asp-for="DepartmentLAR.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="DepartmentLAR.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="DepartmentLAR.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="DepartmentLAR.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.DepartmentLAR.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.DepartmentLAR.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

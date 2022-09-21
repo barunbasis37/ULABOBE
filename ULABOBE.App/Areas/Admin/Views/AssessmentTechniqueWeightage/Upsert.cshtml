@@ -1,0 +1,136 @@
+﻿@model ULABOBE.Models.ViewModels.AssessmentTechniqueWeightageVM
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Assessment Technique Weightage";
+}
+
+<link href="~/lib/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/lib/Chosen/chosen.jquery.min.js"></script>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.AssessmentTechniqueWeightage.Id != 0)
+        {
+
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.Id" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.QueryId" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.CreatedBy" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.CreatedIp" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.CreatedDate" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.UpdatedBy" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.UpdatedDate" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.UpdatedIp" />
+            //edit
+            title = "Edit Assessment Technique Weightage";
+        }
+        else
+        {
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.IsDeleted" value="false" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.CreatedBy" value="000000" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.CreatedIp" value="0.0.0.0" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.UpdatedBy" value="000000" />
+            <input type="hidden" asp-for="AssessmentTechniqueWeightage.UpdatedIp" value="0.0.0.0" />
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+            <h4 class="text-danger">@ViewBag.Message</h4>
+
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.AssessmentTechniqueWeightage.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="AssessmentTechniqueWeightage.CourseHistoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Assessment Type
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.AssessmentTechniqueWeightage.AssessmentTypeId, Model.AssessmentTypeLists, "-Select a Type",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="AssessmentTechniqueWeightage.AssessmentTypeId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="AssessmentTechniqueWeightage.Strategy"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="AssessmentTechniqueWeightage.Strategy" class="form-control" />
+                    <span asp-validation-for="AssessmentTechniqueWeightage.Strategy" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="AssessmentTechniqueWeightage.Percentage"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="AssessmentTechniqueWeightage.Percentage" class="form-control" />
+                    <span asp-validation-for="AssessmentTechniqueWeightage.Percentage" class="text-danger"></span>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.AssessmentTechniqueWeightage.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.AssessmentTechniqueWeightage.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+
+    </script>
+}

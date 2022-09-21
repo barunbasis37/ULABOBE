@@ -1,0 +1,213 @@
+﻿@model ULABOBE.Models.ViewModels.CourseVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Course";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Course.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Course.Id" />
+            <input type="hidden" asp-for="Course.QueryId" />
+            <input type="hidden" asp-for="Course.CreatedBy" />
+            <input type="hidden" asp-for="Course.CreatedIp" />
+            <input type="hidden" asp-for="Course.CreatedDate" />
+            //edit
+            title = "Edit Course";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.Title"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Course.Title" class="form-control" />
+                    <span asp-validation-for="Course.Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.CourseCode"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Course.CourseCode" class="form-control" />
+                    <span asp-validation-for="Course.CourseCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.CreditHour"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Course.CreditHour" class="form-control" />
+                    <span asp-validation-for="Course.CreditHour" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.Summary"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Course.Summary" class="form-control"></textarea>
+                    <span asp-validation-for="Course.Summary" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.TeachingLearningStrategy"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Course.TeachingLearningStrategy" class="form-control"></textarea>
+                    <span asp-validation-for="Course.TeachingLearningStrategy" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.EvaluationPolicy"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Course.EvaluationPolicy" class="form-control"></textarea>
+                    <span asp-validation-for="Course.EvaluationPolicy" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Course.Prerequisite"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Course.Prerequisite" class="form-control" />
+                    <span asp-validation-for="Course.Prerequisite" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Program
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Course.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Course.ProgramId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Course.CourseTypeId, Model.CourseTypeLists, "-Select a Course Type",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="Course.CourseTypeId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+            <input type="hidden" asp-for="Course.IsDeleted" value="false" />
+            <input type="hidden" asp-for="Course.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="Course.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="Course.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="Course.UpdatedIp" value="172.0.0.0" />
+
+            @*<div class="form-group row">
+            <div class="col-4">
+                <label asp-for="IsActive"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>*@
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Course.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Course.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br/><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+        //function validateInput() {
+        //    if (document.getElementById("uploadBox").value == "") {
+        //        swal("Error", "Please select an image", "error");
+        //        return false;
+        //    }
+        //    return true;
+        //};
+
+        //typeahead start
+        //$(document).ready(function () {
+
+        //    var vm = {};
+        //    var issuers = new Bloodhound({
+        //        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('issuerId'),
+        //        queryTokenizer: Bloodhound.tokenizers.whitespace,
+            
+        //        remote: {
+        //            url: '/Admin/IssueInitiate/GetAllIssuer?query=%QUERY',
+        //            wildcard: '%QUERY'
+        //        }
+        //    });
+
+        //    $('#IssuerId').typeahead({
+        //        minLength: 2,
+        //        highlight: true
+        //    }, {
+        //        name: 'issuers',
+        //        display: 'issuerId',
+        //        source: issuers
+        //    }).on("typeahead: select", function (e, issuerId) {
+        //        vm.issuerId = IssuerId.IssuerId;
+        //    });
+
+        //});
+        
+        //typeahead end
+
+    </script>
+}

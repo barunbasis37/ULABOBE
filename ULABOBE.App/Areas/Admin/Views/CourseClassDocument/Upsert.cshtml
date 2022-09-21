@@ -1,0 +1,153 @@
+﻿@model ULABOBE.Models.ViewModels.CourseClassDocumentVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Class Document";
+}
+
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.CourseClassDocument.Id != 0)
+        {
+
+            <input type="hidden" asp-for="CourseClassDocument.Id" />
+            <input type="hidden" asp-for="CourseClassDocument.QueryId" />
+            <input type="hidden" asp-for="CourseClassDocument.CreatedBy" />
+            <input type="hidden" asp-for="CourseClassDocument.CreatedIp" />
+            <input type="hidden" asp-for="CourseClassDocument.CreatedDate" />
+            //edit
+            title = "Edit Class Document";
+        }
+    <div class="col-12 border-bottom">
+        <h2 class="text-primary">@title</h2>
+        <h4 class="text-danger">@ViewBag.Message</h4>
+    </div>
+        <div class="col-8 pt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.CourseClassDocument.CourseHistoryId, Model.CourseHistoryLists, "-Select a Course",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="CourseClassDocument.CourseHistory" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Monitor Report
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="MonitorImage" name="monitoruploadfiles" id="monitoruploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Session Report
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="SessionImage"  name="sessionuploadfiles" id="sessionuploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Semester Course Report
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="SemesterCourseImage" name="semesterCoursefiles" id="smeesterCourseuploadBox" multiple class="form-control" />
+                </div>
+            </div>          
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Lesson Plan Template
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="LessionImage" name="lessonPlanTempfiles" id="lessonPlanTempuploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Course-Program Mapping
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="CourseProMapImage" name="courseProMapfiles" id="courseProMapuploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Upload Attendance Shet
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="AttendanceImage" name="attendanceSheetfiles" id="attendanceSheetuploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="CourseClassDocument.IsDeleted" value="false" />
+            <input type="hidden" asp-for="CourseClassDocument.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseClassDocument.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="CourseClassDocument.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="CourseClassDocument.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.CourseClassDocument.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.CourseClassDocument.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

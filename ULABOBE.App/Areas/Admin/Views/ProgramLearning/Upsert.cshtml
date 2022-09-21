@@ -1,0 +1,140 @@
+﻿@model ULABOBE.Models.ProgramLearning
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Program Learning";
+}
+
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.Id != 0)
+        {
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="QueryId" />
+            <input type="hidden" asp-for="CreatedBy" />
+            <input type="hidden" asp-for="CreatedIp" />
+            <input type="hidden" asp-for="CreatedDate" />
+            //edit
+            title = "Edit Program Learning";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PLOCode"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PLOCode" class="form-control" />
+                    <span asp-validation-for="PLOCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="IsActive"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="IsActive" class="form-control" />
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Priority"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Priority" class="form-control" />
+                    <span asp-validation-for="Priority" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <input type="hidden" asp-for="IsDeleted" value="false" />
+            <input type="hidden" asp-for="CreatedBy" value="423036" />
+            <input type="hidden" asp-for="CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+
+
+        //function validateInput() {
+        //    if (document.getElementById("uploadBox").value == "") {
+        //        swal("Error", "Please select an image", "error");
+        //        return false;
+        //    }
+        //    return true;
+        //};
+
+        //typeahead start
+        //$(document).ready(function () {
+
+        //    var vm = {};
+        //    var issuers = new Bloodhound({
+        //        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('issuerId'),
+        //        queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+        //        remote: {
+        //            url: '/Admin/IssueInitiate/GetAllIssuer?query=%QUERY',
+        //            wildcard: '%QUERY'
+        //        }
+        //    });
+
+        //    $('#IssuerId').typeahead({
+        //        minLength: 2,
+        //        highlight: true
+        //    }, {
+        //        name: 'issuers',
+        //        display: 'issuerId',
+        //        source: issuers
+        //    }).on("typeahead: select", function (e, issuerId) {
+        //        vm.issuerId = IssuerId.IssuerId;
+        //    });
+
+        //});
+
+        //typeahead end
+
+    </script>
+}

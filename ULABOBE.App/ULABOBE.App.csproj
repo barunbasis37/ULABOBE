@@ -1,0 +1,327 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="Current">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-ULABOBE.App-DA5E417D-F054-4626-9298-3E669A9D9621</UserSecretsId>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ProjectGuid>{C6CDEE71-3455-4162-8677-A34C9786A546}</ProjectGuid>
+	  <!--<EnableDefaultCompileItems>false</EnableDefaultCompileItems>-->
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="Areas\Advisor\Views\CourseHistory\Index.cshtml" />
+    <Content Remove="Areas\Advisor\Views\CourseHistory\Upsert.cshtml" />
+    <Content Remove="wwwroot\js\assessmentPattern.js" />
+    <Content Remove="wwwroot\js\assessmentTechniqueWeightage.js" />
+    <Content Remove="wwwroot\js\assessmentType.js" />
+    <Content Remove="wwwroot\js\bloomsCategory.js" />
+    <Content Remove="wwwroot\js\courseClassDocumentSP.js" />
+    <Content Remove="wwwroot\js\courseLearningResource.js" />
+    <Content Remove="wwwroot\js\courseOutline.js" />
+    <Content Remove="wwwroot\js\courseOutlineSP.js" />
+    <Content Remove="wwwroot\js\coursePolicyProcedure.js" />
+    <Content Remove="wwwroot\js\coursePolicyType.js" />
+    <Content Remove="wwwroot\js\courseProgramMapping.js" />
+    <Content Remove="wwwroot\js\departmentGSkill.js" />
+    <Content Remove="wwwroot\js\Faculty\assessmentPattern.js" />
+    <Content Remove="wwwroot\js\Faculty\assessmentTechniqueWeightage.js" />
+    <Content Remove="wwwroot\js\Faculty\courseCLO.js" />
+    <Content Remove="wwwroot\js\Faculty\courseContentCLO.js" />
+    <Content Remove="wwwroot\js\Faculty\courseHistory.js" />
+    <Content Remove="wwwroot\js\Faculty\courseLearningResource.js" />
+    <Content Remove="wwwroot\js\Faculty\courseOutlineSP.js" />
+    <Content Remove="wwwroot\js\Faculty\coursePolicyProcedure.js" />
+    <Content Remove="wwwroot\js\Faculty\courseProgramMapping.js" />
+    <Content Remove="wwwroot\js\Faculty\mappingcloplo.js" />
+    <Content Remove="wwwroot\js\learningResourceType.js" />
+    <Content Remove="wwwroot\js\programCatalog.js" />
+    <Content Remove="wwwroot\js\section.js" />
+    <Content Remove="wwwroot\Reporting\rptCourseProgramMappingAll.rdlc" />
+    <Content Remove="wwwroot\Reporting\rptCourseProMapViewAll.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="wwwroot\Reporting\rptSchool.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="Google.Apis.Admin.Directory.directory_v1" Version="1.57.0.2812" />
+    <PackageReference Include="Grpc.Core" Version="2.46.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.CodeDom" Version="6.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+    <PackageReference Include="Twitter.Typeahead" Version="0.11.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ULABOBE.DataAccess\ULABOBE.DataAccess.csproj" />
+    <ProjectReference Include="..\ULABOBE.Models\ULABOBE.Models.csproj" />
+    <ProjectReference Include="..\ULABOBE.ReportModel\ULABOBE.ReportModel.csproj" />
+    <ProjectReference Include="..\ULABOBE.Utility\ULABOBE.Utility.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Pages\" />
+    <Folder Include="Areas\Advisor\Data\" />
+    <Folder Include="Areas\Advisor\Models\" />
+    <!--<Folder Include="Areas\Faculty\Pages\" />-->
+    <Folder Include="Controllers\" />
+    <Folder Include="Course_OutLine\" />
+    <Folder Include="ReportView\" />
+    <Folder Include="wwwroot\Course_Outline\" />
+    <Folder Include="wwwroot\Document\CourseClassDocument\" />
+    <Folder Include="wwwroot\Document\ProgramCatalog\" />
+    <Folder Include="wwwroot\js\Departmental_Admin\" />
+    <Folder Include="wwwroot\js\Advisor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appsettings.json" />
+    <None Include="Areas\Admin\Views\Correlation\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Correlation\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseCLO\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseCLO\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseContent\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseContent\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseGenericSkill\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseGenericSkill\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseHistory\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseHistory\Upsert.cshtml" />
+    <None Include="Areas\Advisor\Views\CourseHistory\Index.cshtml" />
+    <None Include="Areas\Advisor\Views\CourseHistory\Upsert.cshtml" />
+    <None Include="Areas\Faculty\Views\CourseHistory\Index.cshtml" />
+    <None Include="Areas\Faculty\Views\CourseHistory\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseLearningType\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseLearningType\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseLearning\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseLearning\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\CourseType\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CourseType\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Course\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Course\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\DepartmentLAR\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DepartmentLAR\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\DepartmentSDGContribution\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DepartmentSDGContribution\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Department\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Department\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Designation\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Designation\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\GenericSkillType\Index.cshtml" />
+    <None Include="Areas\Admin\Views\GenericSkillType\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\GenericSkill\Index.cshtml" />
+    <None Include="Areas\Admin\Views\GenericSkill\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Instructor\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Instructor\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\LearningAssessmentRubric\Index.cshtml" />
+    <None Include="Areas\Admin\Views\LearningAssessmentRubric\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\LevelTerm\Index.cshtml" />
+    <None Include="Areas\Admin\Views\LevelTerm\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\MappingCourseProgramLO\Index.cshtml" />
+    <None Include="Areas\Admin\Views\MappingCourseProgramLO\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\MasterSetup\Index.cshtml" />
+    <None Include="Areas\Admin\Views\MasterSetup\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\ProfessionalSkill\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ProfessionalSkill\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramLearning\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramLearning\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramPLO\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramPLO\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramProfessionalSkill\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ProgramProfessionalSkill\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Program\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Program\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Schedule\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Schedule\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\School\Index.cshtml" />
+    <None Include="Areas\Admin\Views\School\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\SDGContribution\Index.cshtml" />
+    <None Include="Areas\Admin\Views\SDGContribution\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Semester\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Semester\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\SessionYear\Index.cshtml" />
+    <None Include="Areas\Admin\Views\SessionYear\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\Time\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Time\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\UserType\Index.cshtml" />
+    <None Include="Areas\Admin\Views\UserType\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\User\ImportUser.cshtml" />
+    <None Include="Areas\Admin\Views\User\Index.cshtml" />
+    <None Include="Areas\Admin\Views\WeekDay\Index.cshtml" />
+    <None Include="Areas\Admin\Views\WeekDay\Upsert.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="Areas\Faculty\Views\Home\Index.cshtml" />
+    <None Include="Areas\Faculty\Views\Home\Privacy.cshtml" />
+    <None Include="Areas\Faculty\_ViewImports.cshtml" />
+    <None Include="Areas\Faculty\_ViewStart.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Lockout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Email.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\Error.cshtml" />
+    <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <None Include="Properties\launchSettings.json" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\serviceDependencies.json" />
+    <None Include="Properties\serviceDependencies.local.json" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CreateAndBackToListButton.cshtml" />
+    <None Include="Views\Shared\_EditAndBackToListButton.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\clo.js" />
+    <None Include="wwwroot\js\cloType.js" />
+    <None Include="wwwroot\js\correlation.js" />
+    <None Include="wwwroot\js\course.js" />
+    <None Include="wwwroot\js\assessmentTechniqueWeightage.js" />
+    <None Include="wwwroot\js\assessmentPattern.js" />
+    <None Include="wwwroot\js\courseClassDocumentSP.js" />
+    <None Include="wwwroot\js\programCatalog.js" />
+    <None Include="wwwroot\js\courseOutlineSP.js" />
+    <None Include="wwwroot\js\courseOutline.js" />
+    <None Include="wwwroot\js\coursePolicyProcedure.js" />
+    <None Include="wwwroot\js\courseLearningResource.js" />
+    <None Include="wwwroot\js\courseCLO.js" />
+    <None Include="wwwroot\js\courseProgramMapping.js" />
+    <None Include="wwwroot\js\courseContentCLO.js" />
+    <None Include="wwwroot\js\courseGS.js" />
+    <None Include="wwwroot\js\courseHistory.js" />
+    <None Include="wwwroot\js\coursePolicyType.js" />
+    <None Include="wwwroot\js\assessmentType.js" />
+    <None Include="wwwroot\js\bloomsCategory.js" />
+    <None Include="wwwroot\js\Faculty\assessmentPattern.js" />
+    <None Include="wwwroot\js\Faculty\assessmentTechniqueWeightage.js" />
+    <None Include="wwwroot\js\Faculty\courseCLO.js" />
+    <None Include="wwwroot\js\Faculty\courseContentCLO.js" />
+    <None Include="wwwroot\js\Faculty\courseHistory.js" />
+    <None Include="wwwroot\js\Faculty\courseLearningResource.js" />
+    <None Include="wwwroot\js\Faculty\courseOutlineSP.js" />
+    <None Include="wwwroot\js\Faculty\coursePolicyProcedure.js" />
+    <None Include="wwwroot\js\Faculty\courseProgramMapping.js" />
+    <None Include="wwwroot\js\Faculty\mappingcloplo.js" />
+    <None Include="wwwroot\js\learningResourceType.js" />
+    <None Include="wwwroot\js\courseType.js" />
+    <None Include="wwwroot\js\department.js" />
+    <None Include="wwwroot\js\departmentGSkill.js" />
+    <None Include="wwwroot\js\departmentLAR.js" />
+    <None Include="wwwroot\js\departmentSDGContribution.js" />
+    <None Include="wwwroot\js\designation.js" />
+    <None Include="wwwroot\js\genericSkill.js" />
+    <None Include="wwwroot\js\genericSkillType.js" />
+    <None Include="wwwroot\js\instructor.js" />
+    <None Include="wwwroot\js\learningAssessmentRubric.js" />
+    <None Include="wwwroot\js\levelterm.js" />
+    <None Include="wwwroot\js\mappingcloplo.js" />
+    <None Include="wwwroot\js\masterSetup.js" />
+    <None Include="wwwroot\js\plo.js" />
+    <None Include="wwwroot\js\professionalSkill.js" />
+    <None Include="wwwroot\js\program.js" />
+    <None Include="wwwroot\js\programPLO.js" />
+    <None Include="wwwroot\js\programProfessionalSkill.js" />
+    <None Include="wwwroot\js\schedule.js" />
+    <None Include="wwwroot\js\section.js" />
+    <None Include="wwwroot\js\school.js" />
+    <None Include="wwwroot\js\sdgContribution.js" />
+    <None Include="wwwroot\js\semester.js" />
+    <None Include="wwwroot\js\sessionyear.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\time.js" />
+    <None Include="wwwroot\js\user.js" />
+    <None Include="wwwroot\js\usertype.js" />
+    <None Include="wwwroot\js\weekDay.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\Chosen\chosen.jquery.min.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
+    <Content Include="Properties\serviceDependencies.local.json.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Reporting\rptCourseProgramMappingAll.rdlc" />
+    <EmbeddedResource Include="wwwroot\Reporting\rptCourseProMapViewAll.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\Reporting\rptCourseProMap.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Reporting\rptSchool.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
