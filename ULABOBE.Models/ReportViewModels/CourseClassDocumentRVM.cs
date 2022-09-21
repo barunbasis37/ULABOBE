@@ -18,6 +18,8 @@ namespace ULABOBE.Models.ReportViewModels
         public int SemesterCode { get; set; }
         public string SemesterName { get; set; }
         public string InstructorName { get; set; }
+        public int ProgramURMSId { get; set; }
+        public string ProgramCode { get; set; }
         public string InstructorCode { get; set; }
         public Guid QueryId { get; set; }
 
