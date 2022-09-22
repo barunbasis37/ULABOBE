@@ -84,8 +84,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
                 FileInfo fileInfo = new FileInfo(files[0].Name);
 
-                if (CourseClassDocumentVM.MonitorImage == null || CourseClassDocumentVM.SessionImage == null || CourseClassDocumentVM.SemesterCourseImage == null
-                        || CourseClassDocumentVM.LessionImage == null || CourseClassDocumentVM.CourseProMapImage == null || CourseClassDocumentVM.AttendanceImage == null)
+                if (files[0] == null || files[1] == null || files[2] == null || files[3] == null || files[4] == null || files[5] == null)
                 {
                     //if (files.Count > 0)
                     //{
@@ -94,7 +93,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                     //if (CourseClassDocumentVM.MonitorImage!=null)
                     //{
                     string monitorfileName = "CMR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string foldermonitorDynamic = aCourseHistory.Semester.Code + @"\Monitor\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string foldermonitorDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string foldermonitorCName = @"Document\CourseClassDocument\" + foldermonitorDynamic;
                     var monitoruploads = Path.Combine(webRootPath, foldermonitorCName);
                     // If directory does not exist, create it
@@ -126,7 +125,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
                     string sessionfileName = "CSR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string foldesessionDynamic = aCourseHistory.Semester.Code + @"\Session\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string foldesessionDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string sessionCName = @"Document\CourseClassDocument\" + foldesessionDynamic;
                     var sessionuploads = Path.Combine(webRootPath, sessionCName);
                     // If directory does not exist, create it
@@ -161,7 +160,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
                     string semestercoursefileName = "SCR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string foldesemestercourseDynamic = aCourseHistory.Semester.Code + @"\SemesterCourse\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string foldesemestercourseDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string foldersemestercourseCName = @"Document\CourseClassDocument\" + foldesemestercourseDynamic;
                     var semestercourseuploads = Path.Combine(webRootPath, foldersemestercourseCName);
                     // If directory does not exist, create it
@@ -192,7 +191,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
                     string lessonfileName = "LPT-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string foldelerlessionDynamic = aCourseHistory.Semester.Code + @"\Lession\" + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string foldelerlessionDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string folderlessionCName = @"Document\CourseClassDocument\" + foldelerlessionDynamic;
                     var lessionuploads = Path.Combine(webRootPath, folderlessionCName);
                     // If directory does not exist, create it
@@ -222,7 +221,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
                     string courseProgramMapfileName = "CPM-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string foldecourseProMapDynamic = aCourseHistory.Semester.Code + @"\CourseProMap\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string foldecourseProMapDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string foldercourseProMapCName = @"Document\CourseClassDocument\" + foldecourseProMapDynamic;
                     var courseProMapuploads = Path.Combine(webRootPath, foldercourseProMapCName);
                     // If directory does not exist, create it
@@ -254,7 +253,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
                     string attendancefileName = "ATD-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
-                    string folderattendanceDynamic = aCourseHistory.Semester.Code + @"\Attendance\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
+                    string folderattendanceDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
                     string folderattendanceCName = @"Document\CourseClassDocument\" + folderattendanceDynamic;
                     var attendanceuploads = Path.Combine(webRootPath, folderattendanceCName);
                     // If directory does not exist, create it
