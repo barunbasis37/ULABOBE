@@ -3,6 +3,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var title = "Create Class Document";
+    //string tag = CourseClassDocument.;
 }
 
 
@@ -53,7 +54,8 @@
                     Upload Monitor Report
                 </div>
                 <div class="col-8">
-                    <input type="file" name="monitoruploadfiles" id="monitoruploadBox" multiple class="form-control" />
+                    <input type="file" name="monitoruploadfiles" id="monitoruploadBox" multiple class="form-control" />                    
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.ClassMonitoringFileName <i class="fas fa-cloud-download-alt"></i></a>
                     
                 </div>
             </div>
@@ -64,6 +66,7 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="sessionuploadfiles" id="sessionuploadBox" multiple class="form-control" />
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseSessionFileName <i class="fas fa-cloud-download-alt"></i></a>
                 </div>
             </div>
 
@@ -73,6 +76,7 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="semesterCoursefiles" id="smeesterCourseuploadBox" multiple class="form-control" />
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.SemesterCourseFileName <i class="fas fa-cloud-download-alt"></i></a>
                 </div>
             </div>          
 
@@ -82,6 +86,7 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="lessonPlanTempfiles" id="lessonPlanTempuploadBox" multiple class="form-control" />
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.LessonPlanFileName <i class="fas fa-cloud-download-alt"></i></a>
                 </div>
             </div>
 
@@ -90,7 +95,8 @@
                     Upload Course-Program Mapping
                 </div>
                 <div class="col-8">
-                    <input type="file"name="courseProMapfiles" id="courseProMapuploadBox" multiple class="form-control" />
+                    <input type="file" name="courseProMapfiles" id="courseProMapuploadBox" multiple class="form-control" />
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseProgramFileName <i class="fas fa-cloud-download-alt"></i></a>
                 </div>
             </div>
 
