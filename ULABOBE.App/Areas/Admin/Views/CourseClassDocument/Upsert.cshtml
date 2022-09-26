@@ -24,10 +24,10 @@
             //edit
             title = "Edit Class Document";
         }
-    <div class="col-12 border-bottom">
-        <h2 class="text-primary">@title</h2>
-        <h4 class="text-danger">@ViewBag.Message</h4>
-    </div>
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+            <h4 class="text-danger">@ViewBag.Message</h4>
+        </div>
         <div class="col-8 pt-4">
 
             <div class="form-group row">
@@ -54,9 +54,13 @@
                     Upload Monitor Report
                 </div>
                 <div class="col-8">
-                    <input type="file" name="monitoruploadfiles" id="monitoruploadBox" multiple class="form-control" />                    
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.ClassMonitoringFileName <i class="fas fa-cloud-download-alt"></i></a>
-                    
+                    <input type="file" name="monitoruploadfiles" id="monitoruploadBox" multiple class="form-control" />
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.ClassMonitoringFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
+
+
                 </div>
             </div>
 
@@ -66,7 +70,11 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="sessionuploadfiles" id="sessionuploadBox" multiple class="form-control" />
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseSessionFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseSessionFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
+
                 </div>
             </div>
 
@@ -76,9 +84,13 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="semesterCoursefiles" id="smeesterCourseuploadBox" multiple class="form-control" />
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.SemesterCourseFileName <i class="fas fa-cloud-download-alt"></i></a>
+
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.SemesterCourseFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
                 </div>
-            </div>          
+            </div>
 
             <div class="form-group row">
                 <div class="col-4">
@@ -86,7 +98,11 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="lessonPlanTempfiles" id="lessonPlanTempuploadBox" multiple class="form-control" />
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.LessonPlanFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.LessonPlanFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
+
                 </div>
             </div>
 
@@ -96,7 +112,11 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="courseProMapfiles" id="courseProMapuploadBox" multiple class="form-control" />
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseProgramFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.CourseProgramFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
+
                 </div>
             </div>
 
@@ -106,6 +126,10 @@
                 </div>
                 <div class="col-8">
                     <input type="file" name="attendanceSheetfiles" id="attendanceSheetuploadBox" multiple class="form-control" />
+                    @if (@Model.CourseClassDocument.Id != 0)
+                    {
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CourseClassDocument" asp-action="DownloadFile" asp-route-id="@Model.CourseClassDocument.Id">@Model.CourseClassDocument.AttendanceSheetFileName <i class="fas fa-cloud-download-alt"></i></a>
+                    }
                 </div>
             </div>
 
@@ -114,7 +138,6 @@
             <input type="hidden" asp-for="CourseClassDocument.CreatedIp" value="172.0.0.0" />
             <input type="hidden" asp-for="CourseClassDocument.UpdatedBy" value="423036" />
             <input type="hidden" asp-for="CourseClassDocument.UpdatedIp" value="172.0.0.0" />
-
 
             <br />
             <div class="form-group row">
