@@ -198,13 +198,14 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @*<a class="dropdown-item" href='@Url.Action("Index", "CourseHistory", new { area = "Advisor" })'>
-                                            Products/Manage/About
-                                        </a>*@
+            Products/Manage/About
+        </a>*@
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseHistory" asp-action="Index">Course Details</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseCLO" asp-action="Index">Course And Course Learning</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="MappingCourseProgramLO" asp-action="Index">Mapping CLO with PLO</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseContent" asp-action="Index">Course Content</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseOutline" asp-action="Index">Course Outline</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseClassDocument" asp-action="Index">Class Document</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentTechniqueWeightage" asp-action="Index">Assessment Technique Weightage</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentPattern" asp-action="Index">Assessment Pattern</a>

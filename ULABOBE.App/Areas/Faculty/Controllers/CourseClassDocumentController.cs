@@ -14,9 +14,9 @@ using System.IO;
 using ULABOBE.Models.ReportViewModels;
 using Microsoft.AspNetCore.Http;
 
-namespace ULABOBE.App.Areas.Admin.Controllers
+namespace ULABOBE.App.Areas.Faculty.Controllers
 {
-    [Area("Admin")]
+    [Area("Faculty")]
     [Authorize]
     public class CourseClassDocumentController : Controller
     {
@@ -30,13 +30,13 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             uniqueSetup = new UniqueSetup(_unitOfWork);
         }
         [HttpGet]
-        [Authorize(Roles = SD.Role_SuperAdmin)]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = SD.Role_SuperAdmin)]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(int? id)
         {
 
@@ -70,7 +70,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = SD.Role_SuperAdmin)]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(CourseClassDocumentVM CourseClassDocumentVM)
         {
 
@@ -567,10 +567,13 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = SD.Role_SuperAdmin)]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.SP_Call.List<CourseClassDocumentRVM>(SD.Proc_CourseClassDocument_GetWithParam, null);
+            int maxSemester = _unitOfWork.Semester.GetAll().Max(mS => mS.Id);
+            UserInfoCheck userInfoCheck = _unitOfWork.UserInfoCheck.GetFirstOrDefault(user => user.UserInfoId == User.Identity.Name);
+            string instructorId = userInfoCheck.UserInfoId;
+            var allObj = _unitOfWork.SP_Call.List<CourseClassDocumentRVM>(SD.Proc_CourseClassDocument_GetWithParam, null).Where(cO => cO.UserInfoId == instructorId && cO.SemesterId == maxSemester);
             return Json(new { data = allObj });
         }
         protected virtual void GetLatestSemester()
@@ -578,27 +581,9 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             ViewBag.InstructorInfo = uniqueSetup.GetInstructor(User.Identity.Name).Name + "(" + uniqueSetup.GetInstructor(User.Identity.Name).ShortCode + ")";
             ViewBag.Semester = uniqueSetup.GetCurrentSemester().Name + "(" + uniqueSetup.GetCurrentSemester().Code + ")";
         }
-        //[HttpGet]
-        //public IActionResult GetDAll(int? courseId)
-        //{
-        //    var allObj = _unitOfWork.CourseLearning.GetAll(c => c.CourseId == courseId);
-        //    return Json(new { data = allObj });
-        //}
+      
 
-        [HttpDelete]
-        [Authorize(Roles = SD.Role_SuperAdmin)]
-        public IActionResult Delete(int id)
-        {
-            var objFromDb = _unitOfWork.CourseLearning.Get(id);
-            if (objFromDb == null)
-            {
-                return Json(new { success = false, message = "Error while deleting" });
-            }
-            _unitOfWork.CourseLearning.Remove(objFromDb);
-            _unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successful" });
-
-        }
+        
 
         #endregion
     }

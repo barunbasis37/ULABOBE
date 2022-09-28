@@ -28,6 +28,7 @@
     <Content Remove="wwwroot\js\departmentGSkill.js" />
     <Content Remove="wwwroot\js\Faculty\assessmentPattern.js" />
     <Content Remove="wwwroot\js\Faculty\assessmentTechniqueWeightage.js" />
+    <Content Remove="wwwroot\js\Faculty\courseClassDocumentFSP.js" />
     <Content Remove="wwwroot\js\Faculty\courseCLO.js" />
     <Content Remove="wwwroot\js\Faculty\courseContentCLO.js" />
     <Content Remove="wwwroot\js\Faculty\courseHistory.js" />
@@ -228,6 +229,7 @@
     <None Include="wwwroot\js\assessmentTechniqueWeightage.js" />
     <None Include="wwwroot\js\assessmentPattern.js" />
     <None Include="wwwroot\js\courseClassDocumentSP.js" />
+    <None Include="wwwroot\js\Faculty\courseClassDocumentFSP.js" />
     <None Include="wwwroot\js\programCatalog.js" />
     <None Include="wwwroot\js\courseOutlineSP.js" />
     <None Include="wwwroot\js\courseOutline.js" />

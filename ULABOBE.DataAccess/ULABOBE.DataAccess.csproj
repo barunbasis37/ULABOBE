@@ -200,6 +200,8 @@
     <Compile Include="Migrations\20220918105822_AddCourseClassDocument.Designer.cs" />
     <Compile Include="Migrations\20220921060124_Sp_GetCourseClassDocumentWithParameter.cs" />
     <Compile Include="Migrations\20220921060124_Sp_GetCourseClassDocumentWithParameter.Designer.cs" />
+    <Compile Include="Migrations\20220928042346_IncreaseStringLengthInCourseClassDoc.cs" />
+    <Compile Include="Migrations\20220928042346_IncreaseStringLengthInCourseClassDoc.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Repository\AssessmentPatternRepository.cs" />
     <Compile Include="Repository\CorrelationRepository.cs" />
