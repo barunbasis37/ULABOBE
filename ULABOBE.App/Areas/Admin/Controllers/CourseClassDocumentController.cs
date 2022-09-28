@@ -78,10 +78,10 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
-                
+
                 CourseHistory aCourseHistory = _unitOfWork.CourseHistory.GetFirstOrDefault(filter: ch => ch.Id == CourseClassDocumentVM.CourseClassDocument.CourseHistoryId, includeProperties: "Course,Semester,Section,Instructor,Course.Program");
 
-                CourseClassDocument objFromDb = _unitOfWork.CourseClassDocument.Get(CourseClassDocumentVM.CourseClassDocument.Id);
+
 
                 if (CourseClassDocumentVM.CourseClassDocument.Id == 0)
                 {
@@ -99,7 +99,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             if (fileContainerName == "monitoruploadfiles")
                             {
                                 string monitorfileName, foldermonitorCName, monitorextenstion;
-                                StoreMonitorReport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out monitorfileName, out foldermonitorCName, out monitorextenstion);
+                                StoreMonitorReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out monitorfileName, out foldermonitorCName, out monitorextenstion);
                                 CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl = foldermonitorCName + @"\" + monitorfileName + monitorextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileExtension = monitorextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName = monitorfileName + monitorextenstion;
@@ -107,7 +107,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             else if (fileContainerName == "sessionuploadfiles")
                             {
                                 string sessionfileName, foldersessionCName, sessionextenstion;
-                                StoreSessionReport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out sessionfileName, out foldersessionCName, out sessionextenstion);
+                                StoreSessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out sessionfileName, out foldersessionCName, out sessionextenstion);
                                 CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl = foldersessionCName + @"\" + sessionfileName + sessionextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.CourseSessionExtension = sessionextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName = sessionfileName + sessionextenstion;
@@ -115,7 +115,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             else if (fileContainerName == "semesterCoursefiles")
                             {
                                 string semestercoursefileName, foldersemestercourseCName, semesterextenstion;
-                                StoreSemesterCoursereport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out semestercoursefileName, out foldersemestercourseCName, out semesterextenstion);
+                                StoreSemesterCoursereport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out semestercoursefileName, out foldersemestercourseCName, out semesterextenstion);
 
                                 CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl = foldersemestercourseCName + @"\" + semestercoursefileName + semesterextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.SemesterCourseExtension = semesterextenstion;
@@ -124,7 +124,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             else if (fileContainerName == "lessonPlanTempfiles")
                             {
                                 string lessonfileName, folderlessionCName, lessionextenstion;
-                                StoreLessionReport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out lessonfileName, out folderlessionCName, out lessionextenstion);
+                                StoreLessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out lessonfileName, out folderlessionCName, out lessionextenstion);
 
                                 CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl = folderlessionCName + @"\" + lessonfileName + lessionextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.LessonPlanExtension = lessionextenstion;
@@ -133,7 +133,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             else if (fileContainerName == "courseProMapfiles")
                             {
                                 string courseProgramMapfileName, foldercourseProMapCName, crouseProgramMapextenstion;
-                                StoreCourseProMapReport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out courseProgramMapfileName, out foldercourseProMapCName, out crouseProgramMapextenstion);
+                                StoreCourseProMapReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out courseProgramMapfileName, out foldercourseProMapCName, out crouseProgramMapextenstion);
 
                                 CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl = foldercourseProMapCName + @"\" + courseProgramMapfileName + crouseProgramMapextenstion;
                                 CourseClassDocumentVM.CourseClassDocument.CourseProgramExtension = crouseProgramMapextenstion;
@@ -144,7 +144,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             else if (fileContainerName == "attendanceSheetfiles")
                             {
                                 string attendancefileName, folderattendanceCName, attendanceextenstion;
-                                StoreAttendanceReport(CourseClassDocumentVM, webRootPath, files, aCourseHistory, out attendancefileName, out folderattendanceCName, out attendanceextenstion);
+                                StoreAttendanceReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out attendancefileName, out folderattendanceCName, out attendanceextenstion);
 
 
                                 CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl = folderattendanceCName + @"\" + attendancefileName + attendanceextenstion;
@@ -168,124 +168,110 @@ namespace ULABOBE.App.Areas.Admin.Controllers
                             CourseClassDocumentVM.CourseClassDocument.IsDeleted = false;
                             _unitOfWork.CourseClassDocument.Add(CourseClassDocumentVM.CourseClassDocument);
 
+
                         }
+                        //_unitOfWork.Save();
                     }
                 }
                 else
                 {
-                    
-                        foreach (IFormFile file in files)
+
+
+                    CourseClassDocument objFromDb = _unitOfWork.CourseClassDocument.Get(CourseClassDocumentVM.CourseClassDocument.Id);
+
+                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl = objFromDb.ClassMonitoringFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileExtension = objFromDb.ClassMonitoringFileExtension;
+                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName = objFromDb.ClassMonitoringFileName;
+
+                    CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl = objFromDb.CourseSessionFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.CourseSessionExtension = objFromDb.CourseSessionExtension;
+                    CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName = objFromDb.CourseSessionFileName;
+
+                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl = objFromDb.SemesterCourseFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseExtension = objFromDb.SemesterCourseExtension;
+                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileName = objFromDb.SemesterCourseFileName;
+
+                    CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl = objFromDb.LessonPlanFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.LessonPlanExtension = objFromDb.LessonPlanExtension;
+                    CourseClassDocumentVM.CourseClassDocument.LessonPlanFileName = objFromDb.LessonPlanFileName;
+
+                    CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl = objFromDb.CourseProgramFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.CourseProgramExtension = objFromDb.LessonPlanExtension;
+                    CourseClassDocumentVM.CourseClassDocument.CourseProgramFileName = objFromDb.CourseProgramFileName;
+
+                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl = objFromDb.AttendanceSheetFileUploadUrl;
+                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetExtension = objFromDb.AttendanceSheetExtension;
+                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileName = objFromDb.AttendanceSheetFileName;
+
+                    foreach (IFormFile file in files)
+                    {
+
+                        var fileContainerName = Path.GetFileName(file.Name);
+
+                        if (fileContainerName == "monitoruploadfiles")
                         {
-
-                            string fileContainerName = Path.GetFileName(file.Name);
-
-                            if (fileContainerName == "monitoruploadfiles")
-                            {
-                                string monitorfileName, foldermonitorCName, monitorextenstion;
-                                StoreMonitorReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out monitorfileName, out foldermonitorCName, out monitorextenstion);
-                                CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl = foldermonitorCName + @"\" + monitorfileName + DateTime.Now.Millisecond + monitorextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileExtension = monitorextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName = monitorfileName + DateTime.Now.Millisecond + monitorextenstion;
-                            }
-                            else if (fileContainerName == "sessionuploadfiles")
-                            {
-                                string sessionfileName, foldersessionCName, sessionextenstion;
-                                StoreSessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out sessionfileName, out foldersessionCName, out sessionextenstion);
-                                CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl = foldersessionCName + @"\m-" + sessionfileName + DateTime.Now.Millisecond + sessionextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.CourseSessionExtension = sessionextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName = "m-" + sessionfileName + DateTime.Now.Millisecond + sessionextenstion;
-                            }
-                            else if (fileContainerName == "semesterCoursefiles")
-                            {
-                                string semestercoursefileName, foldersemestercourseCName, semesterextenstion;
-                                StoreSemesterCoursereport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out semestercoursefileName, out foldersemestercourseCName, out semesterextenstion);
-
-                                CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl = foldersemestercourseCName + @"\" + semestercoursefileName + DateTime.Now.Millisecond + semesterextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.SemesterCourseExtension = semesterextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileName = semestercoursefileName + DateTime.Now.Millisecond + semesterextenstion;
-                            }
-                            else if (fileContainerName == "lessonPlanTempfiles")
-                            {
-                                string lessonfileName, folderlessionCName, lessionextenstion;
-                                StoreLessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out lessonfileName, out folderlessionCName, out lessionextenstion);
-
-                                CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl = folderlessionCName + @"\" + lessonfileName + DateTime.Now.Millisecond + lessionextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.LessonPlanExtension = lessionextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.LessonPlanFileName = lessonfileName + DateTime.Now.Millisecond + lessionextenstion;
-                            }
-                            else if (fileContainerName == "courseProMapfiles")
-                            {
-                                string courseProgramMapfileName, foldercourseProMapCName, crouseProgramMapextenstion;
-                                StoreCourseProMapReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out courseProgramMapfileName, out foldercourseProMapCName, out crouseProgramMapextenstion);
-
-                                CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl = foldercourseProMapCName + @"\" + courseProgramMapfileName + DateTime.Now.Millisecond + crouseProgramMapextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.CourseProgramExtension = crouseProgramMapextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.CourseProgramFileName = courseProgramMapfileName + DateTime.Now.Millisecond + crouseProgramMapextenstion;
-                            }
-                            else if (fileContainerName == "attendanceSheetfiles")
-                            {
-                                string attendancefileName, folderattendanceCName, attendanceextenstion;
-                                StoreAttendanceReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out attendancefileName, out folderattendanceCName, out attendanceextenstion);
-
-
-                                CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl = folderattendanceCName + @"\" + attendancefileName + DateTime.Now.Millisecond + attendanceextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.AttendanceSheetExtension = attendanceextenstion;
-                                CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileName = attendancefileName + DateTime.Now.Millisecond + attendanceextenstion;
-                            }
-                            else
-                            {
-
-                                if (CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName == objFromDb.ClassMonitoringFileName)
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl = objFromDb.ClassMonitoringFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileExtension = objFromDb.ClassMonitoringFileExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName = objFromDb.ClassMonitoringFileName;
-                                }
-                                else if (CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName == objFromDb.CourseSessionFileName)
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl = objFromDb.CourseSessionFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.CourseSessionExtension = objFromDb.CourseSessionExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName = objFromDb.CourseSessionFileName;
-                                }
-                                else if (CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileName == objFromDb.SemesterCourseFileName)
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl = objFromDb.SemesterCourseFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseExtension = objFromDb.SemesterCourseExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileName = objFromDb.SemesterCourseFileName;
-                                }
-                                else if (CourseClassDocumentVM.CourseClassDocument.LessonPlanFileName == objFromDb.LessonPlanFileName)
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl = objFromDb.LessonPlanFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.LessonPlanExtension = objFromDb.LessonPlanExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.LessonPlanFileName = objFromDb.LessonPlanFileName;
-                                }
-                                else if (CourseClassDocumentVM.CourseClassDocument.CourseProgramFileName == objFromDb.CourseProgramFileName)
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl = objFromDb.CourseProgramFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.CourseProgramExtension = objFromDb.LessonPlanExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.CourseProgramFileName = objFromDb.CourseProgramFileName;
-                                }
-                                else
-                                {
-                                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl = objFromDb.AttendanceSheetFileUploadUrl;
-                                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetExtension = objFromDb.AttendanceSheetExtension;
-                                    CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileName = objFromDb.AttendanceSheetFileName;
-                                }
-
-                            }
-
-
+                            string monitorfileName, foldermonitorCName, monitorextenstion;
+                            StoreMonitorReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out monitorfileName, out foldermonitorCName, out monitorextenstion);
+                            CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl = foldermonitorCName + @"\" + monitorfileName + DateTime.Now.Millisecond + monitorextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileExtension = monitorextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileName = monitorfileName + DateTime.Now.Millisecond + monitorextenstion;
                         }
-                    
-                        
-                    CourseClassDocumentVM.CourseClassDocument.UpdatedDate = DateTime.Now;                    
+                        else if (fileContainerName == "sessionuploadfiles")
+                        {
+                            string sessionfileName, foldersessionCName, sessionextenstion;
+                            StoreSessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out sessionfileName, out foldersessionCName, out sessionextenstion);
+                            CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl = foldersessionCName + @"\" + sessionfileName + DateTime.Now.Millisecond + sessionextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.CourseSessionExtension = sessionextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.CourseSessionFileName = sessionfileName + DateTime.Now.Millisecond + sessionextenstion;
+                        }
+                        else if (fileContainerName == "semesterCoursefiles")
+                        {
+                            string semestercoursefileName, foldersemestercourseCName, semesterextenstion;
+                            StoreSemesterCoursereport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out semestercoursefileName, out foldersemestercourseCName, out semesterextenstion);
+
+                            CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl = foldersemestercourseCName + @"\" + semestercoursefileName + DateTime.Now.Millisecond + semesterextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.SemesterCourseExtension = semesterextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileName = semestercoursefileName + DateTime.Now.Millisecond + semesterextenstion;
+                        }
+                        else if (fileContainerName == "lessonPlanTempfiles")
+                        {
+                            string lessonfileName, folderlessionCName, lessionextenstion;
+                            StoreLessionReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out lessonfileName, out folderlessionCName, out lessionextenstion);
+
+                            CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl = folderlessionCName + @"\" + lessonfileName + DateTime.Now.Millisecond + lessionextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.LessonPlanExtension = lessionextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.LessonPlanFileName = lessonfileName + DateTime.Now.Millisecond + lessionextenstion;
+                        }
+                        else if (fileContainerName == "courseProMapfiles")
+                        {
+                            string courseProgramMapfileName, foldercourseProMapCName, crouseProgramMapextenstion;
+                            StoreCourseProMapReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out courseProgramMapfileName, out foldercourseProMapCName, out crouseProgramMapextenstion);
+
+                            CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl = foldercourseProMapCName + @"\" + courseProgramMapfileName + DateTime.Now.Millisecond + crouseProgramMapextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.CourseProgramExtension = crouseProgramMapextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.CourseProgramFileName = courseProgramMapfileName + DateTime.Now.Millisecond + crouseProgramMapextenstion;
+                        }
+                        else if (fileContainerName == "attendanceSheetfiles")
+                        {
+                            string attendancefileName, folderattendanceCName, attendanceextenstion;
+                            StoreAttendanceReport(CourseClassDocumentVM, webRootPath, file, aCourseHistory, out attendancefileName, out folderattendanceCName, out attendanceextenstion);
+
+
+                            CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl = folderattendanceCName + @"\" + attendancefileName + DateTime.Now.Millisecond + attendanceextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.AttendanceSheetExtension = attendanceextenstion;
+                            CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileName = attendancefileName + DateTime.Now.Millisecond + attendanceextenstion;
+                        }                      
+
+
+                    }                    
+
+                    CourseClassDocumentVM.CourseClassDocument.UpdatedDate = DateTime.Now;
                     CourseClassDocumentVM.CourseClassDocument.UpdatedBy = User.Identity.Name;
                     CourseClassDocumentVM.CourseClassDocument.UpdatedIp = Request.HttpContext.Connection.LocalIpAddress.ToString();
                     CourseClassDocumentVM.CourseClassDocument.IsDeleted = false;
-                    _unitOfWork.CourseClassDocument.Update(CourseClassDocumentVM.CourseClassDocument);         
-               
-                }
+                    _unitOfWork.CourseClassDocument.Update(CourseClassDocumentVM.CourseClassDocument);                   
 
+                }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
 
@@ -304,9 +290,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreAttendanceReport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string attendancefileName, out string folderattendanceCName, out string attendanceextenstion)
         {
-            attendancefileName = "ATD-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                attendancefileName = "ATD-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                attendancefileName = "ATD-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string folderattendanceDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            folderattendanceCName = @"Document\CourseClassDocument\" + folderattendanceDynamic;
+            folderattendanceCName = @"Document\CourseClass\" + folderattendanceDynamic;
             var attendanceuploads = Path.Combine(webRootPath, folderattendanceCName);
             // If directory does not exist, create it
             if (!Directory.Exists(attendanceuploads))
@@ -316,7 +311,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
             attendanceextenstion = null;
-            if (file.FileName=="attendanceSheetfiles")
+            if (file.Name == "attendanceSheetfiles")
             {
                 attendanceextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.AttendanceSheetFileUploadUrl != null)
@@ -341,9 +336,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreCourseProMapReport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string courseProgramMapfileName, out string foldercourseProMapCName, out string crouseProgramMapextenstion)
         {
-            courseProgramMapfileName = "CPM-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                courseProgramMapfileName = "CPM-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                courseProgramMapfileName = "CPM-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string foldecourseProMapDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            foldercourseProMapCName = @"Document\CourseClassDocument\" + foldecourseProMapDynamic;
+            foldercourseProMapCName = @"Document\CourseClass\" + foldecourseProMapDynamic;
             var courseProMapuploads = Path.Combine(webRootPath, foldercourseProMapCName);
             // If directory does not exist, create it
             if (!Directory.Exists(courseProMapuploads))
@@ -352,7 +356,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             }
 
             crouseProgramMapextenstion = null;
-            if (file.FileName=="courseProMapfiles")
+            if (file.Name == "courseProMapfiles")
             {
                 crouseProgramMapextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.CourseProgramFileUploadUrl != null)
@@ -377,9 +381,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreLessionReport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string lessonfileName, out string folderlessionCName, out string lessionextenstion)
         {
-            lessonfileName = "LPT-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                lessonfileName = "LPT-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                lessonfileName = "LPT-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string foldelerlessionDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            folderlessionCName = @"Document\CourseClassDocument\" + foldelerlessionDynamic;
+            folderlessionCName = @"Document\CourseClass\" + foldelerlessionDynamic;
             var lessionuploads = Path.Combine(webRootPath, folderlessionCName);
             // If directory does not exist, create it
             if (!Directory.Exists(lessionuploads))
@@ -388,7 +401,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             }
 
             lessionextenstion = null;
-            if (file.FileName=="lessonPlanTempfiles")
+            if (file.Name == "lessonPlanTempfiles")
             {
                 lessionextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.LessonPlanFileUploadUrl != null)
@@ -413,9 +426,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreSemesterCoursereport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string semestercoursefileName, out string foldersemestercourseCName, out string semesterextenstion)
         {
-            semestercoursefileName = "SCR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                semestercoursefileName = "SCR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                semestercoursefileName = "SCR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string foldesemestercourseDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            foldersemestercourseCName = @"Document\CourseClassDocument\" + foldesemestercourseDynamic;
+            foldersemestercourseCName = @"Document\CourseClass\" + foldesemestercourseDynamic;
             var semestercourseuploads = Path.Combine(webRootPath, foldersemestercourseCName);
             // If directory does not exist, create it
             if (!Directory.Exists(semestercourseuploads))
@@ -424,7 +446,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             }
 
             semesterextenstion = null;
-            if (file.FileName=="semesterCoursefiles")
+            if (file.Name == "semesterCoursefiles")
             {
                 semesterextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.SemesterCourseFileUploadUrl != null)
@@ -449,9 +471,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreSessionReport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string sessionfileName, out string foldersessionCName, out string sessionextenstion)
         {
-            sessionfileName = "CSR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                sessionfileName = "CSR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                sessionfileName = "CSR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string foldesessionDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            foldersessionCName = @"Document\CourseClassDocument\" + foldesessionDynamic;
+            foldersessionCName = @"Document\CourseClass\" + foldesessionDynamic;
             var sessionuploads = Path.Combine(webRootPath, foldersessionCName);
             // If directory does not exist, create it
             if (!Directory.Exists(sessionuploads))
@@ -461,7 +492,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
 
             sessionextenstion = null;
-            if (file.FileName=="sessionuploadfiles")
+            if (file.Name == "sessionuploadfiles")
             {
                 sessionextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.CourseSessionFileUploadUrl != null)
@@ -486,9 +517,18 @@ namespace ULABOBE.App.Areas.Admin.Controllers
 
         private void StoreMonitorReport(CourseClassDocumentVM CourseClassDocumentVM, string webRootPath, IFormFile file, CourseHistory aCourseHistory, out string monitorfileName, out string foldermonitorCName, out string monitorextenstion)
         {
-            monitorfileName = "CMR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            string modifyFileTag = DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Millisecond;
+            if (CourseClassDocumentVM.CourseClassDocument.Id != 0)
+            {
+                monitorfileName = "CMR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode + "-" + modifyFileTag;
+            }
+            else
+            {
+                monitorfileName = "CMR-" + aCourseHistory.Semester.Code + "-" + aCourseHistory.Course.CourseCode + "-" + aCourseHistory.Section.SectionCode + "-" + aCourseHistory.Instructor.ShortCode;
+            }
+
             string foldermonitorDynamic = aCourseHistory.Semester.Code + @"\" + aCourseHistory.Course.Program.ProgramCode + @"\" + aCourseHistory.Instructor.Name + " (" + aCourseHistory.Instructor.ShortCode + ")";
-            foldermonitorCName = @"Document\CourseClassDocument\" + foldermonitorDynamic;
+            foldermonitorCName = @"Document\CourseClass\" + foldermonitorDynamic;
             var monitoruploads = Path.Combine(webRootPath, foldermonitorCName);
             // If directory does not exist, create it
             if (!Directory.Exists(monitoruploads))
@@ -497,7 +537,7 @@ namespace ULABOBE.App.Areas.Admin.Controllers
             }
 
             monitorextenstion = null;
-            if (file.FileName=="monitoruploadfiles")
+            if (file.Name == "monitoruploadfiles")
             {
                 monitorextenstion = Path.GetExtension(file.FileName);
                 if (CourseClassDocumentVM.CourseClassDocument.ClassMonitoringFileUploadUrl != null)
