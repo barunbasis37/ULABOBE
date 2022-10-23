@@ -46,7 +46,7 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
             {
                 CourseClassDocument = new CourseClassDocument(),
                 CourseHistoryLists = _unitOfWork.CourseHistory
-                    .GetAll(includeProperties: "Course,Semester,Section,Instructor", filter: ch => ch.SemesterId == uniqueSetup.GetCurrentSemester().Id)
+                    .GetAll(includeProperties: "Course,Semester,Section,Instructor", filter: ch => ch.SemesterId == uniqueSetup.GetCurrentSemester().Id && ch.Instructor==uniqueSetup.GetInstructor(User.Identity.Name))
                     .Select(i => new SelectListItem
                     {
                         Text = i.Course.CourseCode + "(" + i.Section.SectionCode + ")-" + i.Instructor.ShortCode + ")",

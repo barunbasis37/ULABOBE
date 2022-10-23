@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ULAB OBE Application</title>
+    <title>@ViewData["Title"] -OBE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
@@ -21,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ULAB OBE Application</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OBE</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        
                         @if (User.IsInRole(SD.Role_SuperAdmin))
                         {
                             <li class="nav-item dropdown">
@@ -194,18 +195,27 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Upload Document Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseOutline" asp-action="Index">Course Outline</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseClassDocument" asp-action="Index">Class Document</a>
+                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="ProgramCatalog" asp-action="Index">Program Catalog</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Content Management
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @*<a class="dropdown-item" href='@Url.Action("Index", "CourseHistory", new { area = "Advisor" })'>
-            Products/Manage/About
-        </a>*@
+                        Products/Manage/About
+                    </a>*@
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseHistory" asp-action="Index">Course Details</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseCLO" asp-action="Index">Course And Course Learning</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="MappingCourseProgramLO" asp-action="Index">Mapping CLO with PLO</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseContent" asp-action="Index">Course Content</a>
-                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseOutline" asp-action="Index">Course Outline</a>
-                                    <a class="dropdown-item" asp-area="Faculty" asp-controller="CourseClassDocument" asp-action="Index">Class Document</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentTechniqueWeightage" asp-action="Index">Assessment Technique Weightage</a>
                                     <a class="dropdown-item" asp-area="Faculty" asp-controller="AssessmentPattern" asp-action="Index">Assessment Pattern</a>
@@ -295,7 +305,7 @@
 
     <footer class="border-top footer text-white bg-primary">
         <div class="container">
-            &copy; 2021 - All rights reserved ULAB
+            &copy; 2021- @DateTime.Now.Year - All rights reserved ULAB
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

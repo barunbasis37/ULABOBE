@@ -13,6 +13,13 @@ namespace ULABOBE.Models.ReportViewModels
         public string UserInfoId { get; set; }
         public int InstructorId { get; set; }
         public string CourseCode { get; set; }
+        public string Course_Name { get; set; }
+        public string Program_Name { get; set; }
+        public string Pro_URMS { get; set; }
+        public string Department_Name { get; set; }
+        public string Depertment_Code { get; set; }
+        public string School_Name { get; set; }
+        public string School_Code { get; set; }
         public string SectionCode { get; set; }
         public int SemesterId { get; set; }
         public int SemesterCode { get; set; }
@@ -29,13 +36,9 @@ namespace ULABOBE.Models.ReportViewModels
         public DateTime UpdatedDate { get; set; }
 
         public int IsDeleted { get; set; }
-        public string FileName { get; set; }
-        
-        public string FileExtension { get; set; }
-        
+        public string FileName { get; set; }        
+        public string FileExtension { get; set; }        
         public string FileUploadUrl { get; set; }
-
-
 
     }
 }

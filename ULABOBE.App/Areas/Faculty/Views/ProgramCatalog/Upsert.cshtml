@@ -1,0 +1,109 @@
+﻿@model ULABOBE.Models.ViewModels.ProgramCatalogVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Program Catalog";
+}
+
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+        @if (Model.ProgramCatalog.Id != 0)
+        {
+
+            <input type="hidden" asp-for="ProgramCatalog.Id" />
+            <input type="hidden" asp-for="ProgramCatalog.QueryId" />
+            <input type="hidden" asp-for="ProgramCatalog.CreatedBy" />
+            <input type="hidden" asp-for="ProgramCatalog.CreatedIp" />
+            <input type="hidden" asp-for="ProgramCatalog.CreatedDate" />
+            //edit
+            title = "Edit Program Catalog";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Semester
+                </div>
+                <div class="col-8">
+                    <h5>@ViewBag.Semester</h5>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Course
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.ProgramCatalog.ProgramId, Model.ProgramLists, "-Select a Program",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="ProgramCatalog.ProgramData" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    File
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+
+
+            <input type="hidden" asp-for="ProgramCatalog.IsDeleted" value="false" />
+            <input type="hidden" asp-for="ProgramCatalog.CreatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramCatalog.CreatedIp" value="172.0.0.0" />
+            <input type="hidden" asp-for="ProgramCatalog.UpdatedBy" value="423036" />
+            <input type="hidden" asp-for="ProgramCatalog.UpdatedIp" value="172.0.0.0" />
+
+
+            <br />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.ProgramCatalog.Id != 0)
+                    {
+
+                        <partial name="_EditAndBackToListButton" model="Model.ProgramCatalog.Id" />
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-12"><br /><br /></div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ts0708avjz6hbhhzi12375edn6ln2fznt4nkp6jvmtfaiky1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+
+    </script>
+}

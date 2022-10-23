@@ -10,11 +10,12 @@ using ULABOBE.App.Areas.Faculty.Controllers;
 using ULABOBE.DataAccess.Repository.IRepository;
 using ULABOBE.Models;
 using ULABOBE.Models.ViewModels;
+using ULABOBE.Utility;
 
 namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
 {
     [Area("Faculty")]
-    //[Authorize(Roles = "Faculty")]
+    [Authorize]
     public class CoursePolicyProcedureController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +26,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
             _unitOfWork = unitOfWork;
             uniqueSetup = new UniqueSetup(_unitOfWork);
         }
-
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Index()
         {
             GetLatestSemester();
@@ -38,7 +39,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
             ViewBag.Semester = uniqueSetup.GetCurrentSemester().Name + "(" + uniqueSetup.GetCurrentSemester().Code + ")";
         }
 
-
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(int? id)
         {
             GetLatestSemester();
@@ -86,6 +87,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(CoursePolicyProcedureVM coursePolicyProcedureVM)
         {
             GetLatestSemester();
@@ -151,6 +153,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
         #region API Calls
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult GetAll()
         {
             int maxSemester = _unitOfWork.Semester.GetAll().Max(mS => mS.Id);

@@ -12,8 +12,8 @@
 	  <!--<EnableDefaultCompileItems>false</EnableDefaultCompileItems>-->
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Areas\Advisor\Views\CourseHistory\Index.cshtml" />
-    <Content Remove="Areas\Advisor\Views\CourseHistory\Upsert.cshtml" />
+    <Content Remove="wwwroot\js\Anonymous\courseOutlineSP.js" />
+    <Content Remove="wwwroot\js\Anonymous\programCatalog.js" />
     <Content Remove="wwwroot\js\assessmentPattern.js" />
     <Content Remove="wwwroot\js\assessmentTechniqueWeightage.js" />
     <Content Remove="wwwroot\js\assessmentType.js" />
@@ -37,6 +37,7 @@
     <Content Remove="wwwroot\js\Faculty\coursePolicyProcedure.js" />
     <Content Remove="wwwroot\js\Faculty\courseProgramMapping.js" />
     <Content Remove="wwwroot\js\Faculty\mappingcloplo.js" />
+    <Content Remove="wwwroot\js\Faculty\programCatalog.js" />
     <Content Remove="wwwroot\js\learningResourceType.js" />
     <Content Remove="wwwroot\js\programCatalog.js" />
     <Content Remove="wwwroot\js\section.js" />
@@ -55,7 +56,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
@@ -104,6 +105,10 @@
     <None Include="Areas\Admin\Views\CourseHistory\Upsert.cshtml" />
     <None Include="Areas\Advisor\Views\CourseHistory\Index.cshtml" />
     <None Include="Areas\Advisor\Views\CourseHistory\Upsert.cshtml" />
+    <None Include="Areas\Anonymous\Views\Home\Index.cshtml" />
+    <None Include="Areas\Anonymous\Views\Home\Privacy.cshtml" />
+    <None Include="Areas\Anonymous\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Anonymous\Views\_ViewStart.cshtml" />
     <None Include="Areas\Faculty\Views\CourseHistory\Index.cshtml" />
     <None Include="Areas\Faculty\Views\CourseHistory\Upsert.cshtml" />
     <None Include="Areas\Admin\Views\CourseLearningType\Index.cshtml" />
@@ -222,6 +227,8 @@
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\Anonymous\courseOutlineSP.js" />
+    <None Include="wwwroot\js\Anonymous\programCatalog.js" />
     <None Include="wwwroot\js\clo.js" />
     <None Include="wwwroot\js\cloType.js" />
     <None Include="wwwroot\js\correlation.js" />
@@ -230,6 +237,7 @@
     <None Include="wwwroot\js\assessmentPattern.js" />
     <None Include="wwwroot\js\courseClassDocumentSP.js" />
     <None Include="wwwroot\js\Faculty\courseClassDocumentFSP.js" />
+    <None Include="wwwroot\js\Faculty\programCatalog.js" />
     <None Include="wwwroot\js\programCatalog.js" />
     <None Include="wwwroot\js\courseOutlineSP.js" />
     <None Include="wwwroot\js\courseOutline.js" />

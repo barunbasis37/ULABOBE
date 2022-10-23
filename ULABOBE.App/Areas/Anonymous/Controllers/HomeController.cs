@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,9 +13,10 @@ using ULABOBE.DataAccess.Repository.IRepository;
 using ULABOBE.Models.ReportViewModels;
 using ULABOBE.Utility;
 
-namespace ULABOBE.App.Areas.Faculty.Controllers
+namespace ULABOBE.App.Areas.Anonymous.Controllers
 {
-    [Area("Faculty")]
+    [Area("Anonymous")]
+    //[AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,8 +30,19 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
             _logger = logger;
         }
 
+        //[AllowAnonymous]
         public IActionResult Index()
         {
+            try
+            {
+                _logger.LogInformation("Index Load From Anonymous");
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex.Message);
+            }
+            
             return View();
         }
 
@@ -43,6 +56,7 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public async Task<IActionResult> DownloadFile(int id)
         {
             var objFromDb = _unitOfWork.CourseOutline.Get(id);
@@ -73,13 +87,15 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
 
             return File(memoryStream, "application/x-msdownload", Path.GetFileName(imagePath));
         }
+
+        #region API Calls
         [HttpGet]
         //[AllowAnonymous]
         public IActionResult GetAll()
         {
-
             var allObj = _unitOfWork.SP_Call.List<CourseOutlineRVM>(SD.Proc_CourseOutline_GetWithParam, null);
             return Json(new { data = allObj });
         }
+        #endregion
     }
 }

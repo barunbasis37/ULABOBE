@@ -16,7 +16,7 @@ using ULABOBE.Utility;
 namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
 {
     [Area("Faculty")]
-    [Authorize(Roles = "Faculty")]
+    [Authorize]
 
     //[Area(nameof(Faculty))]  // CRFacultyM is the another-folder name inside Areas folder
     //[Route("~/Faculty/[controller]/[action]")]
@@ -35,6 +35,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
             uniqueSetup = new UniqueSetup(_unitOfWork);
         }
         [HttpGet]
+        [Authorize(Roles = SD.Role_Faculty)]
         //[Route("~/Faculty/[controller]/[action]")]
         public IActionResult Index()
         {
@@ -60,6 +61,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Faculty)]
         //[Route(("~/Faculty/[controller]/[action]/{id?}"))]
         public IActionResult Upsert(int? id)
         {
@@ -118,6 +120,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
 
         //[HttpPost("~/Faculty/[controller]/[action]")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(CourseHistoryFVM courseHistoryVM)
         {
             GetLatestSemester();
@@ -243,6 +246,7 @@ namespace ULABOBE.AppOnline.Areas.Faculty.Controllers
         #region API Calls
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult GetAll()
         {
             UserInfoCheck userInfoCheck = _unitOfWork.UserInfoCheck.GetFirstOrDefault(user => user.UserInfoId == User.Identity.Name);

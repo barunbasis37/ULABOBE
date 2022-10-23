@@ -5,10 +5,10 @@
 <br />
 <div class="row">
     <div class="col-6">
-        <h2 class="text-primary">Course Outline List </h2>
+        <h2 class="text-primary">Program Catalog List </h2>
     </div>
     <div class="col-6 text-right">
-        <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Course Outline</a>
+        <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create Program Catalog</a>
     </div>
 </div>
 
@@ -18,10 +18,8 @@
         <thead class="thead-dark">
             <tr class="table-info">
                 <th>ID</th>
-                <th>Course Info</th>
-                <th>Section</th>
-                <th>Semester</th>
-                <th>Instructor</th>
+                <th>Program Info</th>
+                <th>Department</th>                
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,5 +28,5 @@
 
 @section Scripts{
 
-    <script src="~/js/faculty/courseOutlineSP.js"></script>
+    <script src="~/js/anonymous/programCatalog.js"></script>
 }

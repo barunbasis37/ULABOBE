@@ -16,7 +16,7 @@ using ULABOBE.Utility;
 namespace ULABOBE.App.Areas.Faculty.Controllers
 {
     [Area("Faculty")]
-    //[Authorize(Roles = "Faculty")]
+    [Authorize]
     public class CourseOutlineController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -27,13 +27,14 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
             _unitOfWork = unitOfWork;
             _hostEnvironment = hostEnvironment;
         }
-
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Index()
         {
             return View();
         }
 
         private UniqueSetup uniqueSetup;
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(int? id)
         {
 
@@ -43,7 +44,7 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
             {
                 CourseOutline = new CourseOutline(),
                 CourseHistoryLists = _unitOfWork.CourseHistory
-                    .GetAll(includeProperties: "Course,Semester,Section,Instructor", filter: ch => ch.SemesterId == uniqueSetup.GetCurrentSemester().Id)
+                    .GetAll(includeProperties: "Course,Semester,Section,Instructor", filter: ch => ch.SemesterId == uniqueSetup.GetCurrentSemester().Id && ch.Instructor == uniqueSetup.GetInstructor(User.Identity.Name))
                     .Select(i => new SelectListItem
                     {
                         Text = i.Course.CourseCode + "(" + i.Section.SectionCode + ")-" + i.Instructor.ShortCode + ")",
@@ -67,6 +68,7 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult Upsert(CourseOutlineVM courseOutlineVM)
         {
 
@@ -186,6 +188,7 @@ namespace ULABOBE.App.Areas.Faculty.Controllers
         #region API Calls
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Faculty)]
         public IActionResult GetAll()
         {
             int maxSemester = _unitOfWork.Semester.GetAll().Max(mS => mS.Id);
